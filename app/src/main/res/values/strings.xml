@@ -3,4 +3,7 @@
     <string name="meds_tab">Meds</string>
     <string name="friends_tab">Friends</string>
     <string name="report_tab">Report</string>
+    <string name="meds_subtitle">My meds</string>
+    <string name="friends_subtitle">My friends</string>
+    <string name="report_subtitle">My report</string>
 </resources>

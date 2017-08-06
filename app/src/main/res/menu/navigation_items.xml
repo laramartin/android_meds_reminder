@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_meds"
+        android:icon="@drawable/ic_adb_black_24dp"
+        android:title="@string/meds_tab" />
+
+    <item
+        android:id="@+id/menu_friends"
+        android:icon="@drawable/ic_people_black_24dp"
+        android:title="@string/friends_tab" />
+
+    <item
+        android:id="@+id/menu_report"
+        android:icon="@drawable/ic_assignment_black_24dp"
+        android:title="@string/report_tab" />
+
+</menu>

@@ -9,3 +9,4 @@
 .externalNativeBuild
 libs/
 src/main/res/drawable/
+/.idea/misc.xml

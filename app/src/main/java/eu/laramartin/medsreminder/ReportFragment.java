@@ -9,14 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class MedsFragment extends Fragment {
+public class ReportFragment extends Fragment {
 
-    private static final String LOG_TAG = MedsFragment.class.getCanonicalName();
+    private static final String LOG_TAG = ReportFragment.class.getCanonicalName();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.i(LOG_TAG, "meds fragment selected");
-        return inflater.inflate(R.layout.fragment_meds, container, false);
+        Log.i(LOG_TAG, "report fragment selected");
+        return inflater.inflate(R.layout.fragment_report, container, false);
     }
 }

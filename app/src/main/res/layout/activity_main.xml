@@ -29,5 +29,6 @@
         android:layout_marginLeft="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:id="@+id/bottom_navigation_view"
-        app:menu="@menu/navigation_items"/>
+        app:menu="@menu/navigation_items"
+        android:background="@android:color/white"/>
 </android.support.constraint.ConstraintLayout>

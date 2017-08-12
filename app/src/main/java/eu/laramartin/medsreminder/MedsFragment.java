@@ -19,6 +19,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+import static eu.laramartin.medsreminder.firebase.FirebaseUtility.signOut;
+
 
 public class MedsFragment extends Fragment {
 
@@ -36,7 +38,6 @@ public class MedsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_meds, container, false);
         unbinder = ButterKnife.bind(this, view);
-        Log.i(LOG_TAG, "meds fragment selected");
         AppCompatActivity appCompatActivity = ((AppCompatActivity) getActivity());
         appCompatActivity.setSupportActionBar(toolbar);
         setHasOptionsMenu(true);
@@ -58,7 +59,7 @@ public class MedsFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_logout:
-                Toast.makeText(getContext(), "logout", Toast.LENGTH_SHORT).show();
+                signOut(getContext());
                 return true;
         }
         return super.onOptionsItemSelected(item);

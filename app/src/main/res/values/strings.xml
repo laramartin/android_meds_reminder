@@ -8,4 +8,8 @@
     <string name="report_subtitle">My report</string>
     <string name="friends_toolbar_subtitle">My friends</string>
     <string name="report_tootlbar_subtitle">My report</string>
+    <string name="sign_in_cancelled">Sign in cancelled</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="unknown_sign_in_response">Unknown sign in response</string>
 </resources>

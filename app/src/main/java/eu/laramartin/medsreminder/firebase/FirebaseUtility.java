@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.Task;
 import java.util.Arrays;
 
 import eu.laramartin.medsreminder.MainActivity;
+import eu.laramartin.medsreminder.R;
 
 import static android.support.v4.content.ContextCompat.startActivity;
 
@@ -25,6 +26,8 @@ public class FirebaseUtility {
                         Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
                                 new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
                 .setIsSmartLockEnabled(false)
+                .setTheme(R.style.LoginTheme)
+                .setLogo(R.drawable.ic_pill_capsule_128)
                 .build();
     }
 

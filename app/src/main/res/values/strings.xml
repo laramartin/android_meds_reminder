@@ -12,4 +12,5 @@
     <string name="no_internet_connection">No internet connection</string>
     <string name="unknown_error">Unknown error</string>
     <string name="unknown_sign_in_response">Unknown sign in response</string>
+    <string name="menu_logout">Logout</string>
 </resources>

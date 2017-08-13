@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.ErrorCodes;
@@ -20,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.getLoginIntent;
+import static eu.laramartin.medsreminder.utility.Utility.isNetworkConnected;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,12 +30,23 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getCanonicalName();
     @BindView(R.id.bottom_navigation_view)
     BottomNavigationView bottomNavigationView;
+    @BindView(R.id.state_error_view)
+    RelativeLayout errorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        if (!isNetworkConnected(this)) {
+            showError();
+            return;
+        }
+        hideError();
+        loadLoginOrContent(savedInstanceState);
+    }
+
+    private void loadLoginOrContent(Bundle savedInstanceState) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() == null) {
             // not signed in
@@ -40,6 +54,16 @@ public class MainActivity extends AppCompatActivity {
         } else {
             loadContentWhenSuccessfulLogin(savedInstanceState);
         }
+    }
+
+    private void hideError() {
+        errorLayout.setVisibility(View.GONE);
+        bottomNavigationView.setVisibility(View.VISIBLE);
+    }
+
+    private void showError() {
+        errorLayout.setVisibility(View.VISIBLE);
+        bottomNavigationView.setVisibility(View.GONE);
     }
 
     private void startLoginActivity() {

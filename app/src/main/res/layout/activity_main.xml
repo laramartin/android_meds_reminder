@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="eu.laramartin.medsreminder.MainActivity">
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             tools:context="eu.laramartin.medsreminder.MainActivity">
 
     <FrameLayout
         android:id="@+id/fragment_container"
@@ -17,18 +17,43 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/state_error_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/state_error_icon"
+                android:layout_width="@dimen/icon_medium"
+                android:layout_height="@dimen/icon_medium"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_sentiment_very_dissatisfied_black_24px"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/state_error_icon"
+                android:layout_margin="@dimen/margin_medium"
+                android:gravity="center_horizontal"
+                android:text="@string/state_error_message"/>
+        </RelativeLayout>
+
+    </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation_view"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="0dp"
-        android:layout_marginRight="0dp"
-        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:id="@+id/bottom_navigation_view"
-        app:menu="@menu/navigation_items"
-        android:background="@android:color/white"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/navigation_items"/>
 </android.support.constraint.ConstraintLayout>

@@ -13,12 +13,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+import static android.content.ContentValues.TAG;
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.signOut;
 
 
@@ -30,8 +39,16 @@ public class MedsFragment extends Fragment {
     CollapsingToolbarLayout toolbarLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.edit_text)
+    EditText inputText;
+    @BindView(R.id.button)
+    Button sendButton;
+    @BindView(R.id.text_display_database)
+    TextView textDisplayed;
 
     Unbinder unbinder;
+    private static DatabaseReference databaseReference;
+    private static FirebaseDatabase database;
 
     @Nullable
     @Override
@@ -41,7 +58,43 @@ public class MedsFragment extends Fragment {
         AppCompatActivity appCompatActivity = ((AppCompatActivity) getActivity());
         appCompatActivity.setSupportActionBar(toolbar);
         setHasOptionsMenu(true);
+        database = FirebaseDatabase.getInstance();
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String input = inputText.getText().toString();
+                if (!input.isEmpty()) {
+                    writeToDatabase(input);
+                    readFromDatabase();
+                }
+            }
+        });
         return view;
+    }
+
+    private void writeToDatabase(String input) {
+        databaseReference = database.getReference("message");
+        databaseReference.setValue(input);
+    }
+
+    private void readFromDatabase() {
+        // Read from the database
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                textDisplayed.setText(value);
+                Log.d(TAG, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
     }
 
     @Override

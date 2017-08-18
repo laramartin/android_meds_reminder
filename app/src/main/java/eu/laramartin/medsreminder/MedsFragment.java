@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import eu.laramartin.medsreminder.model.User;
 
+import static eu.laramartin.medsreminder.firebase.FirebaseUtility.createUserIfDoesntExist;
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.signOut;
 
 
@@ -54,6 +55,7 @@ public class MedsFragment extends Fragment {
         appCompatActivity.setSupportActionBar(toolbar);
         setHasOptionsMenu(true);
         database = FirebaseDatabase.getInstance();
+        createUserIfDoesntExist();
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +27,8 @@ import static android.support.v4.content.ContextCompat.startActivity;
 
 
 public class FirebaseUtility {
+
+    private static final String LOG_TAG = FirebaseUtility.class.getCanonicalName();
 
     public static Intent getLoginIntent() {
         return AuthUI.getInstance()
@@ -52,32 +55,48 @@ public class FirebaseUtility {
     }
 
     public static void createUserIfDoesntExist() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = database.getReference("user");
+        final DatabaseReference currentUserReference = getCurrentUserReference();
+        currentUserReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.v(LOG_TAG, "onDataChange");
+                if (dataSnapshot.getValue() == null) {
+                    Log.v(LOG_TAG, "User does not exist, creating...");
+                    User user = new User();
+                    FirebaseUser firebaseUser = getFirebaseUser();
+                    user.setEmail(firebaseUser.getEmail());
+                    user.setId(firebaseUser.getUid());
+                    currentUserReference.setValue(user);
+                } else {
+                    User currentUser = dataSnapshot.getValue(User.class);
+                    Log.v(LOG_TAG, "User exists: " + currentUser);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.v(LOG_TAG, "onCancelled");
+            }
+        });
+    }
+
+    private static DatabaseReference getCurrentUserReference() {
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        // get reference to "user" list
+        final DatabaseReference databaseUserReference = database.getReference("user");
+        // get current authenticated user
+        final FirebaseUser firebaseUser = getFirebaseUser();
+        String uid = firebaseUser.getUid();
+        return databaseUserReference.child(uid);
+    }
+
+    @NonNull
+    private static FirebaseUser getFirebaseUser() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser firebaseUser = auth.getCurrentUser();
-        if (firebaseUser!= null) {
-            DatabaseReference userReference = databaseReference.child(firebaseUser.getUid());
-            userReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-//            if (userReference. )
-
-
-            User user = new User();
-            user.setEmail(firebaseUser.getEmail());
-            user.setId(firebaseUser.getUid());
-            databaseReference.child(firebaseUser.getUid())
-                    .setValue(user);
-
+        final FirebaseUser firebaseUser = auth.getCurrentUser();
+        if (firebaseUser == null) {
+            throw new IllegalStateException("User is not logged in");
         }
+        return firebaseUser;
     }
 }

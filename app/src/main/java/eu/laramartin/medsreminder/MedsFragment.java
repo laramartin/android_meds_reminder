@@ -6,7 +6,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,17 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import eu.laramartin.medsreminder.model.User;
 
-import static android.content.ContentValues.TAG;
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.signOut;
 
 
@@ -47,8 +43,7 @@ public class MedsFragment extends Fragment {
     TextView textDisplayed;
 
     Unbinder unbinder;
-    private static DatabaseReference databaseReference;
-    private static FirebaseDatabase database;
+    private FirebaseDatabase database;
 
     @Nullable
     @Override
@@ -64,7 +59,7 @@ public class MedsFragment extends Fragment {
             public void onClick(View view) {
                 String input = inputText.getText().toString();
                 if (!input.isEmpty()) {
-                    writeToDatabase(input);
+                    createUser();
                     readFromDatabase();
                 }
             }
@@ -72,29 +67,33 @@ public class MedsFragment extends Fragment {
         return view;
     }
 
-    private void writeToDatabase(String input) {
-        databaseReference = database.getReference("message");
-        databaseReference.setValue(input);
+    private void createUser() {
+        DatabaseReference databaseReference = database.getReference("user");
+        User user = new User();
+        user.setEmail("lala@blabla.com");
+        user.setId("1234");
+        databaseReference.child("1234")
+                .setValue(user);
     }
 
     private void readFromDatabase() {
         // Read from the database
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                textDisplayed.setText(value);
-                Log.d(TAG, "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                String value = dataSnapshot.getValue(String.class);
+//                textDisplayed.setText(value);
+//                Log.d(TAG, "Value is: " + value);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                Log.w(TAG, "Failed to read value.", error.toException());
+//            }
+//        });
     }
 
     @Override

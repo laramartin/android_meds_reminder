@@ -5,11 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AddMedActivity extends AppCompatActivity {
+
+    @BindView(R.id.add_dosage_spinner)
+    Spinner dosageSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +23,14 @@ public class AddMedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_med);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setDosagePicker();
+    }
+
+    private void setDosagePicker() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.dosage_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dosageSpinner.setAdapter(adapter);
     }
 
     @Override

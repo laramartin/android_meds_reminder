@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
 
     <dimen name="fab_default">56dp</dimen>
+    <dimen name="add_med_day_button_size">25dp</dimen>
 
 </resources>

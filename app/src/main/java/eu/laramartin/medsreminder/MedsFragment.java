@@ -1,8 +1,10 @@
 package eu.laramartin.medsreminder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,12 +25,12 @@ import static eu.laramartin.medsreminder.firebase.FirebaseUtility.signOut;
 
 public class MedsFragment extends Fragment {
 
-    private static final String LOG_TAG = MedsFragment.class.getCanonicalName();
-
     @BindView(R.id.collapsing_toolbar_layout)
     CollapsingToolbarLayout toolbarLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.fab_meds)
+    FloatingActionButton fab;
 
     Unbinder unbinder;
 
@@ -41,6 +43,13 @@ public class MedsFragment extends Fragment {
         appCompatActivity.setSupportActionBar(toolbar);
         setHasOptionsMenu(true);
         createUserIfDoesntExist();
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AddMedActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

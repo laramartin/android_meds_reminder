@@ -13,6 +13,31 @@
     <string name="unknown_error">Unknown error</string>
     <string name="unknown_sign_in_response">Unknown sign in response</string>
     <string name="menu_logout">Logout</string>
-    <string name="add_med_title">Add med</string>
     <string name="save">Save</string>
+
+    <!--Add med screen-->
+    <string name="add_med_title">Add med</string>
+    <string name="add_name_label">Name</string>
+    <string name="add_time_label">Time</string>
+    <string name="add_days_label">Days</string>
+    <string name="add_med_day_monday">Mo</string>
+    <string name="add_med_day_tuesday">Tu</string>
+    <string name="add_med_day_wednesday">We</string>
+    <string name="add_med_day_thursday">Th</string>
+    <string name="add_med_day_friday">Fr</string>
+    <string name="add_med_day_saturday">Sa</string>
+    <string name="add_med_day_sunday">Su</string>
+    <string name="add_dosage_label">Dosage</string>
+    <string name="add_notes_label">Notes</string>
+    <string-array name="dosage_array">
+        <item>Capsule</item>
+        <item>Liquid</item>
+        <item>Syrup</item>
+        <item>Injection</item>
+        <item>Suppository</item>
+        <item>Drop</item>
+        <item>Inhaler</item>
+        <item>Topic</item>
+    </string-array>
+
 </resources>

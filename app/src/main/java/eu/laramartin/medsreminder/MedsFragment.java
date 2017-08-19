@@ -13,8 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.firebase.database.FirebaseDatabase;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -33,7 +31,6 @@ public class MedsFragment extends Fragment {
     Toolbar toolbar;
 
     Unbinder unbinder;
-    private FirebaseDatabase database;
 
     @Nullable
     @Override
@@ -43,7 +40,6 @@ public class MedsFragment extends Fragment {
         AppCompatActivity appCompatActivity = ((AppCompatActivity) getActivity());
         appCompatActivity.setSupportActionBar(toolbar);
         setHasOptionsMenu(true);
-        database = FirebaseDatabase.getInstance();
         createUserIfDoesntExist();
         return view;
     }

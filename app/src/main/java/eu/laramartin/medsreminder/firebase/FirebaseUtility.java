@@ -82,9 +82,7 @@ public class FirebaseUtility {
 
     private static DatabaseReference getCurrentUserReference() {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        // get reference to "user" list
         final DatabaseReference databaseUserReference = database.getReference("user");
-        // get current authenticated user
         final FirebaseUser firebaseUser = getFirebaseUser();
         String uid = firebaseUser.getUid();
         return databaseUserReference.child(uid);
@@ -93,7 +91,7 @@ public class FirebaseUtility {
     @NonNull
     private static FirebaseUser getFirebaseUser() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        final FirebaseUser firebaseUser = auth.getCurrentUser();
+        FirebaseUser firebaseUser = auth.getCurrentUser();
         if (firebaseUser == null) {
             throw new IllegalStateException("User is not logged in");
         }

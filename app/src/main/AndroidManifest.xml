@@ -16,7 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".AddMedActivity">
+        <activity
+            android:name=".AddMedActivity"
+            android:theme="@style/ToolbarTheme"
+            android:label="@string/add_med_title"
+            android:parentActivityName=".MainActivity">
         </activity>
     </application>
 

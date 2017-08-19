@@ -12,17 +12,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import eu.laramartin.medsreminder.model.User;
 
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.createUserIfDoesntExist;
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.signOut;
@@ -36,12 +31,6 @@ public class MedsFragment extends Fragment {
     CollapsingToolbarLayout toolbarLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.edit_text)
-    EditText inputText;
-    @BindView(R.id.button)
-    Button sendButton;
-    @BindView(R.id.text_display_database)
-    TextView textDisplayed;
 
     Unbinder unbinder;
     private FirebaseDatabase database;
@@ -56,46 +45,7 @@ public class MedsFragment extends Fragment {
         setHasOptionsMenu(true);
         database = FirebaseDatabase.getInstance();
         createUserIfDoesntExist();
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String input = inputText.getText().toString();
-                if (!input.isEmpty()) {
-                    createUser();
-                    readFromDatabase();
-                }
-            }
-        });
         return view;
-    }
-
-    private void createUser() {
-        DatabaseReference databaseReference = database.getReference("user");
-        User user = new User();
-        user.setEmail("lala@blabla.com");
-        user.setId("1234");
-        databaseReference.child("1234")
-                .setValue(user);
-    }
-
-    private void readFromDatabase() {
-        // Read from the database
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                // This method is called once with the initial value and again
-//                // whenever data at this location is updated.
-//                String value = dataSnapshot.getValue(String.class);
-//                textDisplayed.setText(value);
-//                Log.d(TAG, "Value is: " + value);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError error) {
-//                // Failed to read value
-//                Log.w(TAG, "Failed to read value.", error.toException());
-//            }
-//        });
     }
 
     @Override

@@ -4,6 +4,14 @@
                                                  android:layout_width="match_parent"
                                                  android:layout_height="match_parent">
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_meds"
+        android:layout_width="@dimen/fab_default"
+        android:layout_height="@dimen/fab_default"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/margin_medium"
+        android:src="@drawable/ic_add_white_24dp"/>
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

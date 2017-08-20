@@ -1,14 +1,15 @@
 package eu.laramartin.medsreminder.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
 
     private String id;
     private String email;
-    private List<Med> meds;
-    private List<Take> takes;
-    private List<String> allowedUsersPerEmail;
+    //private List<Med> meds = new ArrayList<>();
+    private List<Take> takes = new ArrayList<>();
+    private List<String> allowedUsersPerEmail = new ArrayList<>();
 
     public String getId() {
         return id;
@@ -26,13 +27,13 @@ public class User {
         this.email = email;
     }
 
-    public List<Med> getMeds() {
-        return meds;
-    }
-
-    public void setMeds(List<Med> meds) {
-        this.meds = meds;
-    }
+//    public List<Med> getMeds() {
+//        return meds;
+//    }
+//
+//    public void setMeds(List<Med> meds) {
+//        this.meds = meds;
+//    }
 
     public List<Take> getTakes() {
         return takes;
@@ -55,7 +56,7 @@ public class User {
         return "User{" +
                 "id='" + id + '\'' +
                 ", email='" + email + '\'' +
-                ", meds=" + meds +
+//                ", meds=" + meds +
                 ", takes=" + takes +
                 ", allowedUsersPerEmail=" + allowedUsersPerEmail +
                 '}';

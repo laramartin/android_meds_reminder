@@ -21,6 +21,7 @@ import java.util.Arrays;
 
 import eu.laramartin.medsreminder.MainActivity;
 import eu.laramartin.medsreminder.R;
+import eu.laramartin.medsreminder.model.Med;
 import eu.laramartin.medsreminder.model.User;
 
 import static android.support.v4.content.ContextCompat.startActivity;
@@ -96,5 +97,15 @@ public class FirebaseUtility {
             throw new IllegalStateException("User is not logged in");
         }
         return firebaseUser;
+    }
+
+    public static void writeMedOnDb(final String medName) {
+        final Med med = new Med();
+        med.setName(medName);
+        // Adds a new med directly
+        getCurrentUserReference()
+                .child("meds")
+                .push()
+                .setValue(med);
     }
 }

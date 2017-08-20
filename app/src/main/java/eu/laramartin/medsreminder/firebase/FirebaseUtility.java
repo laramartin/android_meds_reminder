@@ -108,4 +108,9 @@ public class FirebaseUtility {
                 .push()
                 .setValue(med);
     }
+
+    public static DatabaseReference getMedsReference() {
+        return getCurrentUserReference().child("meds");
+
+    }
 }

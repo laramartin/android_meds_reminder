@@ -7,6 +7,8 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +17,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -40,12 +41,12 @@ public class MedsFragment extends Fragment {
     Toolbar toolbar;
     @BindView(R.id.fab_meds)
     FloatingActionButton fab;
-    // TODO: 20.08.17 Lara: remove this TextView from layout 
-    @BindView(R.id.meds_text)
-    TextView medsText;
+    @BindView(R.id.meds_recyclerview)
+    RecyclerView recyclerView;
 
     Unbinder unbinder;
     private ChildEventListener medsChildEventListener;
+    private MedsAdapter medsAdapter;
 
     @Nullable
     @Override
@@ -55,8 +56,9 @@ public class MedsFragment extends Fragment {
         AppCompatActivity appCompatActivity = ((AppCompatActivity) getActivity());
         appCompatActivity.setSupportActionBar(toolbar);
         setHasOptionsMenu(true);
-        createUserIfDoesntExist();
-        attachDatabaseReadListener();
+        medsAdapter = new MedsAdapter();
+        recyclerView.setAdapter(medsAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,6 +66,9 @@ public class MedsFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        createUserIfDoesntExist();
+        attachDatabaseReadListener();
         return view;
     }
 
@@ -75,7 +80,7 @@ public class MedsFragment extends Fragment {
                     Med snapshot = dataSnapshot.getValue(Med.class);
                     // TODO: 20.08.17 Lara: here add object to adapter
                     if (snapshot != null) {
-                        medsText.setText(snapshot.toString());
+                        medsAdapter.add(snapshot);
                     }
                     Log.i(LOG_TAG, "snapshot: " + snapshot.toString());
                 }

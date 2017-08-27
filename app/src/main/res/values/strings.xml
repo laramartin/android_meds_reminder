@@ -30,6 +30,8 @@
     <string name="add_dosage_label">Dosage</string>
     <string name="add_notes_label">Notes</string>
     <string name="error_add_med_empty_name">Please enter a name</string>
+    <string name="add_time_default">10:00</string>
+    <string name="add_time_picker_title">Select time</string>
     <string-array name="dosage_array">
         <item>Capsule</item>
         <item>Liquid</item>

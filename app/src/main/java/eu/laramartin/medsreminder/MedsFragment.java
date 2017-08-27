@@ -113,7 +113,6 @@ public class MedsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-        getMedsReference().removeEventListener(medsChildEventListener);
     }
 
     @Override

@@ -1,19 +1,25 @@
 package eu.laramartin.medsreminder;
 
+import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.laramartin.medsreminder.model.Med;
 
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.writeMedOnDb;
 
@@ -26,6 +32,8 @@ public class AddMedActivity extends AppCompatActivity {
     EditText nameEditText;
     @BindView(R.id.add_name_input_text_layout)
     TextInputLayout nameTextInputLayout;
+    @BindView(R.id.add_time_input)
+    TextView timeText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +41,38 @@ public class AddMedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_med);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        timeText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setTimePicker();
+            }
+        });
         setDosagePicker();
 
     }
+
+    private void setTimePicker() {
+        String selectedTime = getTimeInput();
+        String[] timeParts = selectedTime.split(":");
+        int hour = Integer.valueOf(timeParts[0]);
+        int minute = Integer.valueOf(timeParts[1]);
+        TimePickerDialog mTimePicker;
+        mTimePicker = new TimePickerDialog(AddMedActivity.this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                timeText.setText(selectedHour + ":" + selectedMinute);
+            }
+        }, hour, minute, true);
+        mTimePicker.setTitle(getString(R.string.add_time_picker_title));
+        mTimePicker.show();
+    }
+
+    @NonNull
+    private String getTimeInput() {
+        return timeText.getText().toString();
+    }
+
 
     private boolean isNameEmpty() {
         return getMedName().isEmpty();
@@ -63,7 +100,7 @@ public class AddMedActivity extends AppCompatActivity {
                 if (!isNameEmpty()) {
                     Log.v(LOG_TAG, "name is not empty!");
                     // TODO: 20.08.17 Lara: save medication to db
-                    writeMedOnDb(getMedName());
+                    writeMedOnDb(getMedInfo());
                     Toast.makeText(this, "Saving med to DB!", Toast.LENGTH_SHORT).show();
                     finish();
                     break;
@@ -73,6 +110,13 @@ public class AddMedActivity extends AppCompatActivity {
                 }
         }
         return false;
+    }
+
+    private Med getMedInfo() {
+        Med med = new Med();
+        med.setName(getMedName());
+        med.setTime(getTimeInput());
+        return med;
     }
 
     private String getMedName() {

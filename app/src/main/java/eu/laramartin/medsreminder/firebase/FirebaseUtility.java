@@ -99,9 +99,10 @@ public class FirebaseUtility {
         return firebaseUser;
     }
 
-    public static void writeMedOnDb(final String medName) {
+    public static void writeMedOnDb(final Med newMed) {
         final Med med = new Med();
-        med.setName(medName);
+        med.setName(newMed.getName());
+        med.setTime(newMed.getTime());
         // Adds a new med directly
         getCurrentUserReference()
                 .child("meds")

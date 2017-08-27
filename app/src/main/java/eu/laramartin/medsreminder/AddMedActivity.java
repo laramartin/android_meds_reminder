@@ -24,6 +24,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import eu.laramartin.medsreminder.model.Med;
 
 import static eu.laramartin.medsreminder.MedsUtility.getMedIcon;
@@ -61,12 +62,13 @@ public class AddMedActivity extends AppCompatActivity {
 
     private List<TextView> daysTextView = new ArrayList<>();
     private String selectedDays = "";
+    private Unbinder unbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_med);
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         timeText.setOnClickListener(new View.OnClickListener() {
@@ -167,8 +169,7 @@ public class AddMedActivity extends AppCompatActivity {
         dosageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView spinner = (TextView) view;
-                String dosage = String.valueOf(spinner.getText());
+                String dosage = String.valueOf(getResources().getStringArray(R.array.dosage_array)[i]);
                 setMedIcon(dosage);
             }
 
@@ -231,5 +232,11 @@ public class AddMedActivity extends AppCompatActivity {
 
     public String getNotes() {
         return notesEditText.getText().toString();
+    }
+
+    @Override
+    protected void onDestroy() {
+        unbinder.unbind();
+        super.onDestroy();
     }
 }

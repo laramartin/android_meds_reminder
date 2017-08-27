@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -167,14 +166,16 @@ public class AddMedActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.save_med:
-                // TODO: 19.08.17 Lara: implement saving medication to db
                 if (!isNameEmpty()) {
-                    Log.v(LOG_TAG, "name is not empty!");
-                    // TODO: 20.08.17 Lara: save medication to db
-                    writeMedOnDb(getMedInfo());
-                    Toast.makeText(this, "Saving med to DB!", Toast.LENGTH_SHORT).show();
-                    finish();
-                    break;
+                    if (!selectedDays.isEmpty()) {
+                        writeMedOnDb(getMedInfo());
+                        finish();
+                        break;
+                    } else {
+                        Toast.makeText(this, "Please select the days", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+
                 } else {
                     nameTextInputLayout.setError(getString(R.string.error_add_med_empty_name));
                     return false;

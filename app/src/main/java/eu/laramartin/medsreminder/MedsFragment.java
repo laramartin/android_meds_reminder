@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,6 +48,7 @@ public class MedsFragment extends Fragment {
     Unbinder unbinder;
     private ChildEventListener medsChildEventListener;
     private MedsAdapter medsAdapter;
+    private DatabaseReference medsReference;
 
     @Nullable
     @Override
@@ -73,6 +75,7 @@ public class MedsFragment extends Fragment {
     }
 
     private void attachDatabaseReadListener() {
+        medsReference = getMedsReference();
         if (medsChildEventListener == null) {
             medsChildEventListener = new ChildEventListener() {
                 @Override
@@ -105,7 +108,7 @@ public class MedsFragment extends Fragment {
 
                 }
             };
-            getMedsReference().addChildEventListener(medsChildEventListener);
+            medsReference.addChildEventListener(medsChildEventListener);
         }
     }
 
@@ -113,6 +116,7 @@ public class MedsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        medsReference.removeEventListener(medsChildEventListener);
     }
 
     @Override

@@ -52,7 +52,7 @@ public class AddMedActivity extends AppCompatActivity {
     TextView saturdayText;
     @BindView(R.id.add_days_sunday)
     TextView sundayText;
-    
+
     private List<TextView> daysTextView = new ArrayList<>();
     private String selectedDays = "";
 
@@ -186,10 +186,16 @@ public class AddMedActivity extends AppCompatActivity {
         med.setName(getMedName());
         med.setTime(getTimeInput());
         med.setDays(selectedDays);
+        med.setDosage(getDosage());
         return med;
+    }
+
+    private String getDosage() {
+        return dosageSpinner.getSelectedItem().toString();
     }
 
     private String getMedName() {
         return nameEditText.getText().toString();
     }
+
 }

@@ -10,8 +10,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -24,6 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.laramartin.medsreminder.model.Med;
 
+import static eu.laramartin.medsreminder.MedsUtility.getMedIcon;
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.writeMedOnDb;
 
 public class AddMedActivity extends AppCompatActivity {
@@ -31,6 +34,8 @@ public class AddMedActivity extends AppCompatActivity {
     private static final String LOG_TAG = AddMedActivity.class.getCanonicalName();
     @BindView(R.id.add_dosage_spinner)
     Spinner dosageSpinner;
+    @BindView(R.id.add_dosage_icon)
+    ImageView dosageIconImage;
     @BindView(R.id.add_name_input)
     EditText nameEditText;
     @BindView(R.id.add_name_input_text_layout)
@@ -56,6 +61,7 @@ public class AddMedActivity extends AppCompatActivity {
 
     private List<TextView> daysTextView = new ArrayList<>();
     private String selectedDays = "";
+    private View medIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,6 +159,27 @@ public class AddMedActivity extends AppCompatActivity {
                 R.array.dosage_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dosageSpinner.setAdapter(adapter);
+        setDosagePickerListener();
+    }
+
+    private void setDosagePickerListener() {
+        dosageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView spinner = (TextView) view;
+                String dosage = String.valueOf(spinner.getText());
+                setMedIcon(dosage);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    private void setMedIcon(String dosage) {
+        dosageIconImage.setImageResource(getMedIcon(dosage));
     }
 
     @Override

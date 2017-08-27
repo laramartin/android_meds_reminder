@@ -39,7 +39,7 @@ public class FirebaseUtility {
                                 new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
                 .setIsSmartLockEnabled(false)
                 .setTheme(R.style.LoginTheme)
-                .setLogo(R.drawable.ic_pill_capsule_128)
+                .setLogo(R.drawable.ic_capsule_128)
                 .build();
     }
 

@@ -29,6 +29,7 @@
     <string name="add_med_day_sunday">Su</string>
     <string name="add_dosage_label">Dosage</string>
     <string name="add_notes_label">Notes</string>
+    <string name="error_add_med_empty_name">Please enter a name</string>
     <string-array name="dosage_array">
         <item>Capsule</item>
         <item>Liquid</item>

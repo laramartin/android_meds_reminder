@@ -1,6 +1,7 @@
 package eu.laramartin.medsreminder;
 
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -22,7 +23,9 @@ public class AddMedActivity extends AppCompatActivity {
     @BindView(R.id.add_dosage_spinner)
     Spinner dosageSpinner;
     @BindView(R.id.add_name_input)
-    EditText nameInput;
+    EditText nameEditText;
+    @BindView(R.id.add_name_input_text_layout)
+    TextInputLayout nameTextInputLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,19 +60,22 @@ public class AddMedActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.save_med:
                 // TODO: 19.08.17 Lara: implement saving medication to db
-                Toast.makeText(this, "Saving med to DB!", Toast.LENGTH_SHORT).show();
                 if (!isNameEmpty()) {
                     Log.v(LOG_TAG, "name is not empty!");
                     // TODO: 20.08.17 Lara: save medication to db
                     writeMedOnDb(getMedName());
+                    Toast.makeText(this, "Saving med to DB!", Toast.LENGTH_SHORT).show();
+                    finish();
+                    break;
+                } else {
+                    nameTextInputLayout.setError(getString(R.string.error_add_med_empty_name));
+                    return false;
                 }
-                finish();
-                break;
         }
         return false;
     }
 
     private String getMedName() {
-        return nameInput.getText().toString();
+        return nameEditText.getText().toString();
     }
 }

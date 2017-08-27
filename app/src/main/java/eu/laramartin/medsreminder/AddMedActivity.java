@@ -61,7 +61,6 @@ public class AddMedActivity extends AppCompatActivity {
 
     private List<TextView> daysTextView = new ArrayList<>();
     private String selectedDays = "";
-    private View medIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,7 +203,6 @@ public class AddMedActivity extends AppCompatActivity {
                         Toast.makeText(this, "Please select the days", Toast.LENGTH_SHORT).show();
                         return false;
                     }
-
                 } else {
                     nameTextInputLayout.setError(getString(R.string.error_add_med_empty_name));
                     return false;

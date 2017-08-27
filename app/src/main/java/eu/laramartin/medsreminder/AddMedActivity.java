@@ -38,6 +38,8 @@ public class AddMedActivity extends AppCompatActivity {
     TextInputLayout nameTextInputLayout;
     @BindView(R.id.add_time_input)
     TextView timeText;
+    @BindView(R.id.add_notes_input)
+    EditText notesEditText;
     @BindView(R.id.add_days_monday)
     TextView mondayText;
     @BindView(R.id.add_days_tuesday)
@@ -187,6 +189,7 @@ public class AddMedActivity extends AppCompatActivity {
         med.setTime(getTimeInput());
         med.setDays(selectedDays);
         med.setDosage(getDosage());
+        med.setNotes(getNotes());
         return med;
     }
 
@@ -198,4 +201,7 @@ public class AddMedActivity extends AppCompatActivity {
         return nameEditText.getText().toString();
     }
 
+    public String getNotes() {
+        return notesEditText.getText().toString();
+    }
 }

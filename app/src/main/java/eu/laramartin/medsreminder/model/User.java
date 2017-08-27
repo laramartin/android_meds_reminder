@@ -7,7 +7,6 @@ public class User {
 
     private String id;
     private String email;
-    //private List<Med> meds = new ArrayList<>();
     private List<Take> takes = new ArrayList<>();
     private List<String> allowedUsersPerEmail = new ArrayList<>();
 
@@ -26,14 +25,6 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
-//    public List<Med> getMeds() {
-//        return meds;
-//    }
-//
-//    public void setMeds(List<Med> meds) {
-//        this.meds = meds;
-//    }
 
     public List<Take> getTakes() {
         return takes;
@@ -56,7 +47,6 @@ public class User {
         return "User{" +
                 "id='" + id + '\'' +
                 ", email='" + email + '\'' +
-//                ", meds=" + meds +
                 ", takes=" + takes +
                 ", allowedUsersPerEmail=" + allowedUsersPerEmail +
                 '}';

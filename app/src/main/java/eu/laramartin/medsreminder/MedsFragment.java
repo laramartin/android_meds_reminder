@@ -81,7 +81,6 @@ public class MedsFragment extends Fragment {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Med snapshot = dataSnapshot.getValue(Med.class);
-                    // TODO: 20.08.17 Lara: here add object to adapter
                     if (snapshot != null) {
                         medsAdapter.add(snapshot);
                     }

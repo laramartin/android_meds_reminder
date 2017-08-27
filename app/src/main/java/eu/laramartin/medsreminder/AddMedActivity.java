@@ -4,6 +4,7 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -16,6 +17,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +38,23 @@ public class AddMedActivity extends AppCompatActivity {
     TextInputLayout nameTextInputLayout;
     @BindView(R.id.add_time_input)
     TextView timeText;
+    @BindView(R.id.add_days_monday)
+    TextView mondayText;
+    @BindView(R.id.add_days_tuesday)
+    TextView tuesdayText;
+    @BindView(R.id.add_days_wednesday)
+    TextView wednesdayText;
+    @BindView(R.id.add_days_thursday)
+    TextView thursdayText;
+    @BindView(R.id.add_days_friday)
+    TextView fridayText;
+    @BindView(R.id.add_days_saturday)
+    TextView saturdayText;
+    @BindView(R.id.add_days_sunday)
+    TextView sundayText;
+    
+    private List<TextView> daysTextView = new ArrayList<>();
+    private String selectedDays = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +69,56 @@ public class AddMedActivity extends AppCompatActivity {
                 setTimePicker();
             }
         });
+        setDays();
+        setDaysListener();
         setDosagePicker();
+    }
 
+    private void setDaysListener() {
+        for (int i = 0; i < daysTextView.size(); i++) {
+            daysTextView.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    setDaySelectedState(view);
+                }
+            });
+        }
+    }
+
+    private void setDaySelectedState(View view) {
+        TextView currentDayTextView = (TextView) view;
+        String day = currentDayTextView.getText().toString();
+        if (isDaySelected(day)) {
+            selectedDays = selectedDays.replace(day, "");
+            setDayViewBackground(currentDayTextView, false);
+        } else {
+            selectedDays = selectedDays.concat(day);
+            setDayViewBackground(currentDayTextView, true);
+        }
+    }
+
+    private void setDayViewBackground(TextView currentDayTextView, boolean paintSelected) {
+        int colorId;
+        if (paintSelected) {
+            colorId = R.color.colorAccent;
+        } else {
+            colorId = R.color.colorSoftGrey;
+        }
+        currentDayTextView.setBackgroundColor(ContextCompat.getColor(this, colorId));
+    }
+
+    private boolean isDaySelected(String day) {
+        return selectedDays.contains(day);
+    }
+
+    private void setDays() {
+        daysTextView.add(mondayText);
+        daysTextView.add(tuesdayText);
+        daysTextView.add(wednesdayText);
+        daysTextView.add(thursdayText);
+        daysTextView.add(fridayText);
+        daysTextView.add(saturdayText);
+        daysTextView.add(sundayText);
     }
 
     private void setTimePicker() {
@@ -116,6 +185,7 @@ public class AddMedActivity extends AppCompatActivity {
         Med med = new Med();
         med.setName(getMedName());
         med.setTime(getTimeInput());
+        med.setDays(selectedDays);
         return med;
     }
 

@@ -103,6 +103,7 @@ public class FirebaseUtility {
         final Med med = new Med();
         med.setName(newMed.getName());
         med.setTime(newMed.getTime());
+        med.setDays(newMed.getDays());
         // Adds a new med directly
         getCurrentUserReference()
                 .child("meds")

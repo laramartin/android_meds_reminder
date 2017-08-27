@@ -137,7 +137,9 @@ public class AddMedActivity extends AppCompatActivity {
         mTimePicker = new TimePickerDialog(AddMedActivity.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                timeText.setText(selectedHour + ":" + selectedMinute);
+                String formattedHour = String.format("%02d", selectedHour);
+                String formattedMinute = String.format("%02d", selectedMinute);
+                timeText.setText(formattedHour + ":" + formattedMinute);
             }
         }, hour, minute, true);
         mTimePicker.setTitle(getString(R.string.add_time_picker_title));

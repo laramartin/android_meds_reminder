@@ -204,7 +204,7 @@ public class AddMedActivity extends AppCompatActivity {
                         return false;
                     }
                 } else {
-                    nameTextInputLayout.setError(getString(R.string.error_add_med_empty_name));
+                    nameTextInputLayout.setError(getString(R.string.add_med_error_empty_name));
                     return false;
                 }
         }

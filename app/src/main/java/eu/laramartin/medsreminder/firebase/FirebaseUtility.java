@@ -60,9 +60,7 @@ public class FirebaseUtility {
         currentUserReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.v(LOG_TAG, "onDataChange");
                 if (dataSnapshot.getValue() == null) {
-                    Log.v(LOG_TAG, "User does not exist, creating...");
                     User user = new User();
                     FirebaseUser firebaseUser = getFirebaseUser();
                     user.setEmail(firebaseUser.getEmail());

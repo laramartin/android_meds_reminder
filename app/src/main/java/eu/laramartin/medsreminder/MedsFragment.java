@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,7 +44,7 @@ public class MedsFragment extends Fragment {
     @BindView(R.id.meds_recyclerview)
     RecyclerView recyclerView;
 
-    Unbinder unbinder;
+    private Unbinder unbinder;
     private ChildEventListener medsChildEventListener;
     private MedsAdapter medsAdapter;
     private DatabaseReference medsReference;
@@ -84,7 +83,6 @@ public class MedsFragment extends Fragment {
                     if (snapshot != null) {
                         medsAdapter.add(snapshot);
                     }
-                    Log.i(LOG_TAG, "snapshot: " + snapshot.toString());
                 }
 
                 @Override

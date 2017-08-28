@@ -15,7 +15,7 @@
     <string name="menu_logout">Logout</string>
     <string name="save">Save</string>
 
-    <!--Add med screen-->
+    <!-- Add med screen -->
     <string name="add_med_title">Add med</string>
     <string name="add_name_label">Name</string>
     <string name="add_time_label">Time</string>
@@ -43,4 +43,7 @@
         <item>Topic</item>
     </string-array>
 
+    <!-- Meds list screen -->
+    <string name="meds_edit_title">Edit</string>
+    <string name="meds_take_title">Take</string>
 </resources>

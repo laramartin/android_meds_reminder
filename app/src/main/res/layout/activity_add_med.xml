@@ -63,7 +63,8 @@
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/add_name_input"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:maxLength="50"/>
             </android.support.design.widget.TextInputLayout>
 
             <TextView
@@ -72,8 +73,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/add_time_label"
@@ -195,8 +194,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:text="@string/add_dosage_label"
                 app:layout_constraintBottom_toBottomOf="@+id/add_dosage_spinner"
@@ -221,8 +218,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/add_notes_label"
@@ -238,6 +233,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
+                android:maxLength="200"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="@+id/add_dosage_spinner"
                 app:layout_constraintRight_toRightOf="@+id/add_dosage_spinner"

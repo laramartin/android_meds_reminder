@@ -61,6 +61,8 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
         // TODO: 31.08.17 Lara: handle set date
         holder.medDate.setText("07/07/2017");
         holder.medTime.setText(med.getTime());
+        // TODO: 31.08.17 Lara: handle different time status
+        holder.medTimeStatus.setText("On time");
         // TODO: 31.08.17 Lara: format days like "Days: Mo, Tu"
         holder.medDays.setText(med.getDays());
         // TODO: 31.08.17 Lara: format notes like "Notes: blabla..." 

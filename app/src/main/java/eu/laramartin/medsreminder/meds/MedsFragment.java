@@ -81,6 +81,7 @@ public class MedsFragment extends Fragment {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Med snapshot = dataSnapshot.getValue(Med.class);
+                    snapshot.setKey(dataSnapshot.getKey());
                     if (snapshot != null) {
                         medsAdapter.add(snapshot);
                     }
@@ -93,7 +94,9 @@ public class MedsFragment extends Fragment {
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+                    Med med = dataSnapshot.getValue(Med.class);
+                    med.setKey(dataSnapshot.getKey());
+                    medsAdapter.remove(med);
                 }
 
                 @Override

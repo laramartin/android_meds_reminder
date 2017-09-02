@@ -1,4 +1,4 @@
-package eu.laramartin.medsreminder;
+package eu.laramartin.medsreminder.meds;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +13,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.laramartin.medsreminder.MedsUtility;
+import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.model.Med;
 
 public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>{

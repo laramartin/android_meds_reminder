@@ -1,6 +1,7 @@
 package eu.laramartin.medsreminder.meds;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,34 +18,13 @@ import eu.laramartin.medsreminder.MedsUtility;
 import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.model.Med;
 
-public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>{
+public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder> {
 
     private List<Med> meds = new ArrayList<>();
 
     public void add(Med med) {
         meds.add(med);
-        notifyItemInserted(meds.size() -1);
-    }
-
-    public class MedViewHolder extends RecyclerView.ViewHolder {
-
-        @BindView(R.id.med_icon)
-        ImageView medIcon;
-        @BindView(R.id.med_name)
-        TextView medName;
-        @BindView(R.id.med_time) TextView medTime;
-        @BindView(R.id.med_days) TextView medDays;
-        @BindView(R.id.med_notes) TextView medNotes;
-        // TODO: 31.08.17 Lara: show next date to take medicine
-        @BindView(R.id.med_date)
-        TextView medDate;
-        // TODO: 31.08.17 Lara: show current time status (on time, soon, it' time)
-        @BindView(R.id.med_time_status) TextView medTimeStatus;
-
-        public MedViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
+        notifyItemInserted(meds.size() - 1);
     }
 
     @Override
@@ -57,22 +37,7 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
 
     @Override
     public void onBindViewHolder(MedViewHolder holder, int position) {
-        Med med = meds.get(position);
-        holder.medName.setText(med.getName());
-        holder.medIcon.setImageResource(MedsUtility.getMedIcon(med.getDosage()));
-        // TODO: 31.08.17 Lara: handle set date
-        holder.medDate.setText("07/07/2017");
-        holder.medTime.setText(med.getTime());
-        // TODO: 31.08.17 Lara: handle different time status
-        holder.medTimeStatus.setText("On time");
-        // TODO: 31.08.17 Lara: format days like "Days: Mo, Tu"
-        holder.medDays.setText(med.getDays());
-        // TODO: 31.08.17 Lara: format notes like "Notes: blabla..." 
-        if (med.getNotes() != null && !med.getNotes().isEmpty()) {
-            holder.medNotes.setText(med.getNotes());
-        } else {
-            holder.medNotes.setVisibility(View.INVISIBLE);
-        }
+        holder.bind(meds.get(position));
     }
 
     @Override
@@ -81,5 +46,83 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
             return meds.size();
         }
         return 0;
+    }
+
+    public class MedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        @BindView(R.id.med_icon)
+        ImageView medIcon;
+        @BindView(R.id.med_name)
+        TextView medName;
+        @BindView(R.id.med_time)
+        TextView medTime;
+        @BindView(R.id.med_days)
+        TextView medDays;
+        @BindView(R.id.med_notes)
+        TextView medNotes;
+        // TODO: 31.08.17 Lara: show next date to take medicine
+        @BindView(R.id.med_date)
+        TextView medDate;
+        // TODO: 31.08.17 Lara: show current time status (on time, soon, it' time)
+        @BindView(R.id.med_time_status)
+        TextView medTimeStatus;
+        @BindView(R.id.meds_constraint_layout_details)
+        ConstraintLayout medsLayoutDetails;
+        @BindView(R.id.icon_arrow_down)
+        ImageView arrowDownIcon;
+        private MedsAdapterItem medsAdapterItem;
+
+        public MedViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            medsAdapterItem.setExpanded(!medsAdapterItem.isExpanded());
+            setDetailsVisibility();
+        }
+
+        private void setDetailsVisibility() {
+            if (medsAdapterItem.isExpanded()) {
+                showDetails();
+            } else {
+                hideDetails();
+            }
+        }
+
+        private void showDetails() {
+            medsLayoutDetails.setVisibility(View.VISIBLE);
+            arrowDownIcon.setVisibility(View.INVISIBLE);
+        }
+
+        private void hideDetails() {
+            medsLayoutDetails.setVisibility(View.GONE);
+            arrowDownIcon.setVisibility(View.VISIBLE);
+        }
+
+        public void bind(Med med) {
+            MedsAdapterItem medsAdapterItem = new MedsAdapterItem();
+            medsAdapterItem.setMed(med);
+            this.medsAdapterItem = medsAdapterItem;
+
+            medName.setText(med.getName());
+            medIcon.setImageResource(MedsUtility.getMedIcon(med.getDosage()));
+            // TODO: 31.08.17 Lara: handle set date
+            medDate.setText("07/07/2017");
+            medTime.setText(med.getTime());
+            // TODO: 31.08.17 Lara: handle different time status
+            medTimeStatus.setText("On time");
+            // TODO: 31.08.17 Lara: format days like "Days: Mo, Tu"
+            medDays.setText(med.getDays());
+            // TODO: 31.08.17 Lara: format notes like "Notes: blabla..."
+            if (med.getNotes() != null && !med.getNotes().isEmpty()) {
+                medNotes.setText(med.getNotes());
+            } else {
+                medNotes.setVisibility(View.INVISIBLE);
+            }
+            setDetailsVisibility();
+        }
     }
 }

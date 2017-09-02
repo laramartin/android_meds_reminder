@@ -7,6 +7,7 @@ public class Med {
     private String days;
     private String dosage;
     private String notes;
+    private String key;
 
     public String getName() {
         return name;
@@ -48,6 +49,14 @@ public class Med {
         this.notes = notes;
     }
 
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     @Override
     public String toString() {
         return "Med{" +
@@ -56,6 +65,7 @@ public class Med {
                 ", days='" + days + '\'' +
                 ", dosage='" + dosage + '\'' +
                 ", notes='" + notes + '\'' +
+                ", key='" + key + '\'' +
                 '}';
     }
 }

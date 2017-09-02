@@ -21,6 +21,7 @@ import java.util.Arrays;
 
 import eu.laramartin.medsreminder.MainActivity;
 import eu.laramartin.medsreminder.R;
+import eu.laramartin.medsreminder.meds.MedsAdapterItem;
 import eu.laramartin.medsreminder.model.Med;
 import eu.laramartin.medsreminder.model.User;
 
@@ -115,6 +116,10 @@ public class FirebaseUtility {
 
     public static DatabaseReference getMedsReference() {
         return getCurrentUserReference().child("meds");
+    }
 
+    public static void removeMed(MedsAdapterItem medsAdapterItem) {
+        String key = medsAdapterItem.getMed().getKey();
+        getMedsReference().child(key).removeValue();
     }
 }

@@ -1,6 +1,8 @@
 package eu.laramartin.medsreminder.meds;
 
 import android.content.Context;
+import android.media.AudioManager;
+import android.os.Vibrator;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,9 +16,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import eu.laramartin.medsreminder.common.MedsUtility;
 import eu.laramartin.medsreminder.R;
+import eu.laramartin.medsreminder.common.DialogsUtility;
+import eu.laramartin.medsreminder.common.MedsUtility;
 import eu.laramartin.medsreminder.model.Med;
+
+import static android.content.Context.VIBRATOR_SERVICE;
 
 public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder> {
 
@@ -48,7 +53,17 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
         return 0;
     }
 
-    public class MedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public void remove(Med med) {
+        for (int i = 0; i < meds.size(); i++) {
+            if (med.getKey().equals(meds.get(i).getKey())) {
+                meds.remove(i);
+                notifyItemRemoved(i);
+                break;
+            }
+        }
+    }
+
+    public class MedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         @BindView(R.id.med_icon)
         ImageView medIcon;
@@ -76,6 +91,7 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
@@ -123,6 +139,19 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
                 medNotes.setVisibility(View.INVISIBLE);
             }
             setDetailsVisibility();
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            DialogsUtility.showRemoveMedDialog(view.getContext(), medsAdapterItem);
+            AudioManager am = (AudioManager) view.getContext().getSystemService(Context.AUDIO_SERVICE);
+            switch (am.getRingerMode()) {
+                case AudioManager.RINGER_MODE_VIBRATE:
+                case AudioManager.RINGER_MODE_NORMAL:
+                    ((Vibrator) view.getContext().getSystemService(VIBRATOR_SERVICE)).vibrate(100);
+                    return true;
+            }
+            return true;
         }
     }
 }

@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddMedActivity"
+            android:name=".meds.AddMedActivity"
             android:theme="@style/ToolbarTheme"
             android:label="@string/add_med_title"
             android:parentActivityName=".MainActivity">

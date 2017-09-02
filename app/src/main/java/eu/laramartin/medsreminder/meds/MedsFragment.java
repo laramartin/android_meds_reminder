@@ -1,4 +1,4 @@
-package eu.laramartin.medsreminder;
+package eu.laramartin.medsreminder.meds;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.model.Med;
 
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.createUserIfDoesntExist;

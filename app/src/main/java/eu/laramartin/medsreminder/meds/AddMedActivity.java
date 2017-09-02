@@ -1,4 +1,4 @@
-package eu.laramartin.medsreminder;
+package eu.laramartin.medsreminder.meds;
 
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -25,6 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.model.Med;
 
 import static eu.laramartin.medsreminder.MedsUtility.getMedIcon;

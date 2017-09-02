@@ -46,7 +46,10 @@
     <!-- Meds list screen -->
     <string name="meds_edit_title">Edit</string>
     <string name="meds_take_title">Take</string>
+
+    <!-- Dialogs -->
+    <string name="dialog_delete_med_description">Are you sure you want to remove this med? You will lose all the med data.</string>
     <string name="dialog_delete_confirm">Delete</string>
-    <string name="delete_med">Are you sure you want to remove this med? You will lose all the med data.</string>
     <string name="dialog_cancel">Cancel</string>
+
 </resources>

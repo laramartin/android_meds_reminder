@@ -12,7 +12,6 @@
     <string name="no_internet_connection">No internet connection</string>
     <string name="unknown_error">Unknown error</string>
     <string name="unknown_sign_in_response">Unknown sign in response</string>
-    <string name="menu_logout">Logout</string>
     <string name="save">Save</string>
 
     <!-- Add med screen -->
@@ -51,5 +50,12 @@
     <string name="dialog_delete_med_description">Are you sure you want to remove this med? You will lose all the med data.</string>
     <string name="dialog_delete_confirm">Delete</string>
     <string name="dialog_cancel">Cancel</string>
+
+    <!-- Menu -->
+    <string name="menu_reminders">Reminders</string>
+    <string name="menu_logout">Logout</string>
+
+    <!-- Reminders screen -->
+    <string name="reminders_title">Reminders</string>
 
 </resources>

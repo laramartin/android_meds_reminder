@@ -24,6 +24,11 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/ToolbarTheme">
         </activity>
+        <activity
+            android:name=".reminders.RemindersActivity"
+            android:label="@string/reminders_title"
+            android:theme="@style/ToolbarTheme">
+        </activity>
     </application>
 
 </manifest>

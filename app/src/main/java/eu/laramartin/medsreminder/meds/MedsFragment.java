@@ -27,6 +27,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.model.Med;
+import eu.laramartin.medsreminder.reminders.RemindersActivity;
 
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.createUserIfDoesntExist;
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.getMedsReference;
@@ -130,6 +131,10 @@ public class MedsFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_logout:
                 signOut(getContext());
+                return true;
+            case R.id.menu_reminders:
+                Intent intent = new Intent(getActivity(), RemindersActivity.class);
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);

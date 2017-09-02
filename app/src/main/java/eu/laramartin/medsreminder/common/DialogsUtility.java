@@ -12,7 +12,7 @@ public class DialogsUtility {
 
     public static void showRemoveMedDialog(Context context, final MedsAdapterItem medsAdapterItem) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage(R.string.delete_med);
+        builder.setMessage(R.string.dialog_delete_med_description);
         builder.setPositiveButton(R.string.dialog_delete_confirm, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 FirebaseUtility.removeMed(medsAdapterItem);

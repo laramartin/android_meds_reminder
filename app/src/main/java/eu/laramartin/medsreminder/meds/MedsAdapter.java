@@ -135,6 +135,7 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
             // TODO: 31.08.17 Lara: format notes like "Notes: blabla..."
             if (med.getNotes() != null && !med.getNotes().isEmpty()) {
                 medNotes.setText(med.getNotes());
+                medNotes.setVisibility(View.VISIBLE);
             } else {
                 medNotes.setVisibility(View.INVISIBLE);
             }

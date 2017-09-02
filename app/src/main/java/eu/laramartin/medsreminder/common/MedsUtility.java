@@ -1,4 +1,6 @@
-package eu.laramartin.medsreminder;
+package eu.laramartin.medsreminder.common;
+
+import eu.laramartin.medsreminder.R;
 
 public abstract class MedsUtility {
 

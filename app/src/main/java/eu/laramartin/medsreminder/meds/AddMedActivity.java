@@ -28,7 +28,7 @@ import butterknife.Unbinder;
 import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.model.Med;
 
-import static eu.laramartin.medsreminder.MedsUtility.getMedIcon;
+import static eu.laramartin.medsreminder.common.MedsUtility.getMedIcon;
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.writeMedOnDb;
 
 public class AddMedActivity extends AppCompatActivity {

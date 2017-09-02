@@ -14,7 +14,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import eu.laramartin.medsreminder.MedsUtility;
+import eu.laramartin.medsreminder.common.MedsUtility;
 import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.model.Med;
 

@@ -20,7 +20,6 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.Remi
 
     private List<Med> meds = new ArrayList<>();
 
-    // TODO: 06.09.17 Lara: handle add med
     public void add(Med med) {
         meds.add(med);
         notifyItemInserted(meds.size() - 1);

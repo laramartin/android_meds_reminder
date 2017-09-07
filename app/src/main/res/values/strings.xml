@@ -57,5 +57,7 @@
 
     <!-- Reminders screen -->
     <string name="reminders_title">Reminders</string>
+    <string name="its_time_reminder_title">It\'s time!</string>
+    <string name="med_reminder_notification_text">It\'s time to take your meds :)</string>
 
 </resources>

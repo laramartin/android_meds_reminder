@@ -66,6 +66,7 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.Remi
         @Override
         public void onClick(View view) {
             // TODO: 07.09.17 Lara: handle click in switch
+            RemindersUtility.scheduleMedReminder(view.getContext());
         }
     }
 }

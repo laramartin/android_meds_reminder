@@ -46,7 +46,7 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.Remi
         return 0;
     }
 
-    public class RemindersViewHolder extends RecyclerView.ViewHolder {
+    public class RemindersViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         @BindView(R.id.reminder_med_name)
         TextView medName;
@@ -56,10 +56,16 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.Remi
         public RemindersViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            medSwitch.setOnClickListener(this);
         }
 
         public void bind(Med med) {
             medName.setText(med.getName());
+        }
+
+        @Override
+        public void onClick(View view) {
+            // TODO: 07.09.17 Lara: handle click in switch
         }
     }
 }

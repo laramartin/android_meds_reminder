@@ -52,6 +52,7 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.Remi
         TextView medName;
         @BindView(R.id.reminder_switch)
         SwitchCompat medSwitch;
+        private Med med = null;
 
         public RemindersViewHolder(View itemView) {
             super(itemView);
@@ -61,12 +62,13 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.Remi
 
         public void bind(Med med) {
             medName.setText(med.getName());
+            this.med = med;
         }
 
         @Override
         public void onClick(View view) {
             // TODO: 07.09.17 Lara: handle click in switch
-            RemindersUtility.scheduleMedReminder(view.getContext());
+            RemindersUtility.scheduleMedReminder(view.getContext(), med);
         }
     }
 }

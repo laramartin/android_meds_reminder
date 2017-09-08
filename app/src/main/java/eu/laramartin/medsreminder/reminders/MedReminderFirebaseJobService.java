@@ -1,6 +1,5 @@
 package eu.laramartin.medsreminder.reminders;
 
-import android.content.Context;
 import android.os.AsyncTask;
 
 import com.firebase.jobdispatcher.JobParameters;
@@ -15,8 +14,7 @@ public class MedReminderFirebaseJobService extends JobService {
         backgroundTask = new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] params) {
-                Context context = MedReminderFirebaseJobService.this;
-                ReminderTasks.executeTask(context, ReminderTasks.ACTION_MED_REMINDER);
+                ReminderTasks.executeTask(MedReminderFirebaseJobService.this, ReminderTasks.ACTION_MED_REMINDER);
                 return null;
             }
 

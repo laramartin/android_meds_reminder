@@ -4,7 +4,7 @@ import android.content.Context;
 
 public class ReminderTasks {
 
-    static final String ACTION_MED_REMINDER = "med-reminder";
+    static final String ACTION_MED_REMINDER = "med_reminder";
 
     public static void executeTask(Context context, String action) {
         if (ACTION_MED_REMINDER.equals(action)) {

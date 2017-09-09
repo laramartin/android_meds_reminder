@@ -29,14 +29,8 @@
             android:label="@string/reminders_title"
             android:theme="@style/ToolbarTheme">
         </activity>
-        <service
-            android:name=".reminders.MedReminderIntentService"
-            android:exported="false"/>
-        <service android:name=".reminders.MedReminderFirebaseJobService" android:exported="false">
-            <intent-filter>
-                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
-            </intent-filter>
-        </service>
+
+        <receiver android:name=".reminders.ReminderReceiver"/>
     </application>
 
 </manifest>

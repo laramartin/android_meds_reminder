@@ -27,7 +27,7 @@ class NotificationUtils {
      * This pending intent id is used to uniquely reference the pending intent
      */
     private static final int MED_REMINDER_PENDING_INTENT_ID = 566;
-    private static final int ACTION_DRINK_PENDING_INTENT_ID = 1;
+    private static final int ACTION_TAKE_MED_PENDING_INTENT_ID = 1;
 //    private static final int ACTION_IGNORE_PENDING_INTENT_ID = 14;
 
 //    public static void clearAllNotifications(Context context) {
@@ -78,15 +78,15 @@ class NotificationUtils {
 //    }
 
     static NotificationCompat.Action takeMedAction(Context context) {
-        Intent incrementWaterCountIntent = new Intent(context, MedReminderIntentService.class);
-        PendingIntent incrementWaterPendingIntent = PendingIntent.getService(
+        Intent takeMedIntent = new Intent(context, ReminderReceiver.class);
+        PendingIntent takeMedPendingIntent = PendingIntent.getService(
                 context,
-                ACTION_DRINK_PENDING_INTENT_ID,
-                incrementWaterCountIntent,
+                ACTION_TAKE_MED_PENDING_INTENT_ID,
+                takeMedIntent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
         NotificationCompat.Action takeMedAction = new NotificationCompat.Action(R.drawable.ic_capsule_128,
                 "I did it!",
-                incrementWaterPendingIntent);
+                takeMedPendingIntent);
         return takeMedAction;
     }
 

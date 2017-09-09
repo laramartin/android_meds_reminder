@@ -27,7 +27,8 @@
         <activity
             android:name=".reminders.RemindersActivity"
             android:label="@string/reminders_title"
-            android:theme="@style/ToolbarTheme">
+            android:theme="@style/ToolbarTheme"
+            android:parentActivityName=".MainActivity">
         </activity>
 
         <receiver android:name=".reminders.ReminderReceiver"/>

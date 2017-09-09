@@ -16,39 +16,39 @@ import static eu.laramartin.medsreminder.common.CalendarUtility.timeToNextGivenD
 
 public class RemindersUtility {
 
-    private static boolean isInitialized;
-
-    // synchronized to not have this method executed more than once at the time
-    synchronized public static void scheduleMedReminder(Context context, Med med) {
-        if (isInitialized) {
-            return;
-        }
-        int REMINDER_INTERVAL_SECONDS = 0;
+    public static void scheduleMedReminder(Context context, Med med) {
 
         // days of the week when med has to be taken
         // "MoTu" would be [2, 3]
         List<Integer> calendarDays = getMedDays(med);
-        String[] timeSplitted = getMedTimeSplit(med);
-        int hours = Integer.valueOf(timeSplitted[0]);
-        int minutes = Integer.valueOf(timeSplitted[1]);
+        String[] timeSplit = getMedTimeSplit(med);
+        int hours = Integer.valueOf(timeSplit[0]);
+        int minutes = Integer.valueOf(timeSplit[1]);
 
-        // TODO: 09.09.17 Lara: for each day to take med, calculate day and hours difference in seconds
-        // TODO: 09.09.17 Lara: and schedule a new job/alarm
         for (Integer calendarDay : calendarDays) {
-            long diffInSeconds = timeToNextGivenDay(calendarDay, hours, minutes) / 1000;
+            long diffInMillis = timeToNextGivenDay(calendarDay, hours, minutes);
 
+            // https://developer.android.com/training/scheduling/alarms.html
+            // Wake up the device to fire a one-time (non-repeating) alarm in 5 seconds:
+            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(context, ReminderReceiver.class);
+            int pendingIntentId = (int) System.currentTimeMillis();
+            PendingIntent alarmIntent = PendingIntent.getBroadcast(context, pendingIntentId, intent, 0);
+
+            alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    SystemClock.elapsedRealtime() +
+                            diffInMillis, alarmIntent);
         }
 
-        // https://developer.android.com/training/scheduling/alarms.html
-        // Wake up the device to fire a one-time (non-repeating) alarm in 5 seconds:
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, ReminderReceiver.class);
-        PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() +
-                        5 * 1000, alarmIntent);
-
-        isInitialized = true;
+        // TODO: 09.09.17 Lara: remove this!!! I kept it for testing
+//        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+//        Intent intent = new Intent(context, ReminderReceiver.class);
+//        int id = (int) System.currentTimeMillis();
+//        PendingIntent alarmIntent = PendingIntent.getBroadcast(context, id, intent, 0);
+//
+//        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+//                SystemClock.elapsedRealtime() +
+//                        5 * 1000, alarmIntent);
     }
 }

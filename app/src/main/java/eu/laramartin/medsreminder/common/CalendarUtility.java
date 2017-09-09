@@ -8,7 +8,7 @@ import eu.laramartin.medsreminder.model.Med;
 
 public class CalendarUtility {
 
-    public static List<Integer> getDaysOfWeek(String medDays) {
+    private static List<Integer> getDaysOfWeek(String medDays) {
         List<Integer> weekDays = new ArrayList<>();
         if (medDays.contains("Mo")) {
             weekDays.add(Calendar.MONDAY);
@@ -36,8 +36,7 @@ public class CalendarUtility {
 
     public static String[] getMedTimeSplit(Med med) {
         String time = med.getTime();
-        String[] timeParts = time.split(":");
-        return timeParts;
+        return time.split(":");
     }
 
     public static long timeToNextGivenDay(int targetDoW, int targetHoW, int targetMoW) {
@@ -65,7 +64,6 @@ public class CalendarUtility {
 
     public static List<Integer> getMedDays(Med med) {
         String medDays = med.getDays();
-        List<Integer> weekDays = getDaysOfWeek(medDays);
-        return weekDays;
+        return getDaysOfWeek(medDays);
     }
 }

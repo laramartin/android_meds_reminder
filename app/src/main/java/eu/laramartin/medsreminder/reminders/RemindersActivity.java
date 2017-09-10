@@ -14,6 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.laramartin.medsreminder.R;
+import eu.laramartin.medsreminder.common.Settings;
 import eu.laramartin.medsreminder.firebase.FirebaseUtility;
 import eu.laramartin.medsreminder.model.Med;
 
@@ -30,7 +31,8 @@ public class RemindersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reminders);
         ButterKnife.bind(this);
 
-        remindersAdapter = new RemindersAdapter();
+
+        remindersAdapter = new RemindersAdapter(new Settings(this));
         recyclerView.setAdapter(remindersAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         setAdapterData();

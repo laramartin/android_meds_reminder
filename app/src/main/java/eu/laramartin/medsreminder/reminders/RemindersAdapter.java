@@ -14,11 +14,19 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.laramartin.medsreminder.R;
+import eu.laramartin.medsreminder.common.Settings;
 import eu.laramartin.medsreminder.model.Med;
+
+import static eu.laramartin.medsreminder.reminders.RemindersUtility.buildSwitchReminderKey;
 
 public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.RemindersViewHolder> {
 
     private List<Med> meds = new ArrayList<>();
+    private Settings settings;
+
+    public RemindersAdapter(Settings settings) {
+        this.settings = settings;
+    }
 
     public void add(Med med) {
         meds.add(med);
@@ -58,17 +66,22 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.Remi
             super(itemView);
             ButterKnife.bind(this, itemView);
             medSwitch.setOnClickListener(this);
+
         }
 
         public void bind(Med med) {
             medName.setText(med.getName());
+            String switchReminderKey = buildSwitchReminderKey(med);
+            medSwitch.setChecked(settings.getAlarmEnabled(switchReminderKey));
             this.med = med;
         }
 
         @Override
         public void onClick(View view) {
-            // TODO: 07.09.17 Lara: handle click in switch
             RemindersUtility.scheduleMedReminder(view.getContext(), med);
+            String switchReminderKey = buildSwitchReminderKey(med);
+            boolean isSwitchActivated = RemindersUtility.isSwitchActivated(view);
+            settings.setAlarmEnabled(switchReminderKey, isSwitchActivated);
         }
     }
 }

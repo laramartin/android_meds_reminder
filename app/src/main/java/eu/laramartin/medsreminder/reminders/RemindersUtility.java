@@ -9,8 +9,10 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import eu.laramartin.medsreminder.firebase.FirebaseUtility;
 import eu.laramartin.medsreminder.model.Med;
 
 import static eu.laramartin.medsreminder.common.CalendarUtility.getMedDays;
@@ -27,6 +29,7 @@ public class RemindersUtility {
         String[] timeSplit = getMedTimeSplit(med);
         int hours = Integer.valueOf(timeSplit[0]);
         int minutes = Integer.valueOf(timeSplit[1]);
+        List<Integer> reminderPendingIntentIds = new ArrayList<>();
 
         for (Integer calendarDay : calendarDays) {
             long diffInMillis = timeToNextGivenDay(calendarDay, hours, minutes);
@@ -36,13 +39,13 @@ public class RemindersUtility {
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(context, ReminderReceiver.class);
             int pendingIntentId = (int) System.currentTimeMillis();
+            reminderPendingIntentIds.add(pendingIntentId);
             PendingIntent alarmIntent = PendingIntent.getBroadcast(context, pendingIntentId, intent, 0);
 
             alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                     SystemClock.elapsedRealtime() +
                             diffInMillis, alarmIntent);
         }
-
 
         // TODO: 09.09.17 Lara: remove this!!! I kept it for testing
 //        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -53,6 +56,9 @@ public class RemindersUtility {
 //        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
 //                SystemClock.elapsedRealtime() +
 //                        5 * 1000, alarmIntent);
+
+        med.setReminderPendingIntentIds(reminderPendingIntentIds);
+        FirebaseUtility.updateMedOnDb(med);
     }
 
     public static boolean isSwitchActivated(View view) {
@@ -63,5 +69,16 @@ public class RemindersUtility {
     @NonNull
     public static String buildSwitchReminderKey(Med med) {
         return "reminder".concat(med.getKey());
+    }
+
+    public static void cancelMedReminder(Context context, List<Integer> reminderPendingIntentIds) {
+        for (int pendingIntentId : reminderPendingIntentIds) {
+            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            if (alarmManager != null) {
+                Intent intent = new Intent(context, ReminderReceiver.class);
+                PendingIntent alarmIntent = PendingIntent.getBroadcast(context, pendingIntentId, intent, 0);
+                alarmManager.cancel(alarmIntent);
+            }
+        }
     }
 }

@@ -98,19 +98,17 @@ public class FirebaseUtility {
         return firebaseUser;
     }
 
-    public static void writeMedOnDb(final Med newMed) {
-        final Med med = new Med();
-        med.setName(newMed.getName());
-        med.setTime(newMed.getTime());
-        med.setDays(newMed.getDays());
-        med.setDosage(newMed.getDosage());
-        if (!newMed.getNotes().isEmpty()) {
-            med.setNotes(newMed.getNotes());
-        }
-        // Adds a new med directly
+    public static void writeMedOnDb(final Med med) {
         getCurrentUserReference()
                 .child("meds")
                 .push()
+                .setValue(med);
+    }
+
+    public static void updateMedOnDb(final Med med) {
+        getCurrentUserReference()
+                .child("meds")
+                .child(med.getKey())
                 .setValue(med);
     }
 

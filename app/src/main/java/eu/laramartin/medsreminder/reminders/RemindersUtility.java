@@ -5,6 +5,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.SwitchCompat;
+import android.view.View;
 
 import java.util.List;
 
@@ -50,5 +53,15 @@ public class RemindersUtility {
 //        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
 //                SystemClock.elapsedRealtime() +
 //                        5 * 1000, alarmIntent);
+    }
+
+    public static boolean isSwitchActivated(View view) {
+        SwitchCompat currentSwitch = (SwitchCompat) view;
+        return currentSwitch.isChecked();
+    }
+
+    @NonNull
+    public static String buildSwitchReminderKey(Med med) {
+        return "reminder".concat(med.getKey());
     }
 }

@@ -6,8 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.SwitchCompat;
-import android.view.View;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +19,8 @@ import static eu.laramartin.medsreminder.common.CalendarUtility.getMedTimeSplit;
 import static eu.laramartin.medsreminder.common.CalendarUtility.timeToNextGivenDay;
 
 public class RemindersUtility {
+
+    private static final String LOG_TAG = RemindersUtility.class.getCanonicalName();
 
     public static void scheduleMedReminder(Context context, Med med) {
 
@@ -45,6 +46,8 @@ public class RemindersUtility {
             alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                     SystemClock.elapsedRealtime() +
                             diffInMillis, alarmIntent);
+            Log.i(LOG_TAG, "created alarm for: " + calendarDay +
+                    " diff in millis: " + diffInMillis);
         }
 
         // TODO: 09.09.17 Lara: remove this!!! I kept it for testing
@@ -59,11 +62,8 @@ public class RemindersUtility {
 
         med.setReminderPendingIntentIds(reminderPendingIntentIds);
         FirebaseUtility.updateMedOnDb(med);
-    }
 
-    public static boolean isSwitchActivated(View view) {
-        SwitchCompat currentSwitch = (SwitchCompat) view;
-        return currentSwitch.isChecked();
+        Log.i(LOG_TAG, "created alarm for: " + med.getKey());
     }
 
     @NonNull

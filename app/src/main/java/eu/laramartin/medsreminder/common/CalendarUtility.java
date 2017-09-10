@@ -43,7 +43,7 @@ public class CalendarUtility {
         Calendar now = Calendar.getInstance();
         Calendar next = Calendar.getInstance();
         int nowDoW = now.get(Calendar.DAY_OF_WEEK);
-        int addDays = (nowDoW + targetDoW) % 7;
+        int addDays = (targetDoW - nowDoW) % 7;
         next.add(Calendar.DAY_OF_YEAR, addDays);
         next.set(Calendar.HOUR_OF_DAY, targetHoW);
         next.set(Calendar.MINUTE, targetMoW);

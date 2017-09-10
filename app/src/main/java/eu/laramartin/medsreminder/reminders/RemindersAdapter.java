@@ -3,9 +3,11 @@ package eu.laramartin.medsreminder.reminders;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import static eu.laramartin.medsreminder.reminders.RemindersUtility.buildSwitchR
 
 public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.RemindersViewHolder> {
 
+    private static final String LOG_TAG = RemindersAdapter.class.getCanonicalName();
     private List<Med> meds = new ArrayList<>();
     private Settings settings;
 
@@ -55,7 +58,7 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.Remi
         return 0;
     }
 
-    public class RemindersViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class RemindersViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.reminder_med_name)
         TextView medName;
@@ -66,28 +69,34 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.Remi
         public RemindersViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            medSwitch.setOnClickListener(this);
 
         }
 
-        public void bind(Med med) {
+        public void bind(final Med med) {
             medName.setText(med.getName());
             String switchReminderKey = buildSwitchReminderKey(med);
+            medSwitch.setOnCheckedChangeListener(null);
             medSwitch.setChecked(settings.getAlarmEnabled(switchReminderKey));
+            medSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean isReminderEnabled) {
+                    if (!isReminderEnabled) {
+                        // cancel reminder
+                        RemindersUtility.cancelMedReminder(compoundButton.getContext(),
+                                med.getReminderPendingIntentIds());
+                        med.setReminderPendingIntentIds(new ArrayList<Integer>());
+                        FirebaseUtility.updateMedOnDb(med);
+                        Log.i(LOG_TAG, "alarm disabled for: " + med.getKey());
+                    } else {
+                        // activate reminder
+                        RemindersUtility.scheduleMedReminder(compoundButton.getContext(), med);
+                        Log.i(LOG_TAG, "alarm enabled for: " + med.getKey());
+                    }
+                    String switchReminderKey = buildSwitchReminderKey(med);
+                    settings.setAlarmEnabled(switchReminderKey, isReminderEnabled);
+                }
+            });
             this.med = med;
-        }
-
-        @Override
-        public void onClick(View view) {
-            RemindersUtility.scheduleMedReminder(view.getContext(), med);
-            String switchReminderKey = buildSwitchReminderKey(med);
-            boolean isSwitchActivated = RemindersUtility.isSwitchActivated(view);
-            if (isSwitchActivated) {
-                RemindersUtility.cancelMedReminder(view.getContext(), med.getReminderPendingIntentIds());
-                med.setReminderPendingIntentIds(new ArrayList<Integer>());
-                FirebaseUtility.updateMedOnDb(med);
-            }
-            settings.setAlarmEnabled(switchReminderKey, isSwitchActivated);
         }
     }
 }

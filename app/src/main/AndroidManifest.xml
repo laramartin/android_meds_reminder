@@ -26,7 +26,7 @@
         </activity>
         <activity
             android:name=".reminders.RemindersActivity"
-            android:label="@string/reminders_title"
+            android:label="@string/reminders_screen_title"
             android:parentActivityName=".MainActivity"
             android:theme="@style/ToolbarTheme">
         </activity>
@@ -34,9 +34,11 @@
         <service
             android:name=".reminders.ReminderIntentService"
             android:exported="false"/>
-        <service android:name=".reminders.ReminderFirebaseJobService" android:exported="false">
+        <service
+            android:name=".reminders.ReminderFirebaseJobService"
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
             </intent-filter>
         </service>
     </application>

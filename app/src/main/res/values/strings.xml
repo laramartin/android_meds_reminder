@@ -56,9 +56,9 @@
     <string name="menu_logout">Logout</string>
 
     <!-- Reminders screen -->
-    <string name="reminders_title">Reminders</string>
-    <string name="its_time_reminder_title">It\'s time!</string>
-    <string name="med_reminder_notification_text">It\'s time to take your meds :)</string>
+    <string name="reminders_screen_title">Reminders</string>
+    <string name="reminder_notification_title">It\'s time!</string>
+    <string name="reminder_notification_body">It\'s time to take your meds :)</string>
     <string name="reminder_day_bundle_key">reminder_day_key</string>
     <string name="reminder_time_bundle_key">reminder_time_key</string>
     <string name="reminder_tag_bundle_key">reminder_id_key</string>

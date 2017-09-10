@@ -64,7 +64,6 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.Remi
         TextView medName;
         @BindView(R.id.reminder_switch)
         SwitchCompat medSwitch;
-        private Med med = null;
 
         public RemindersViewHolder(View itemView) {
             super(itemView);
@@ -74,6 +73,7 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.Remi
 
         public void bind(final Med med) {
             medName.setText(med.getName());
+
             String switchReminderKey = buildSwitchReminderKey(med);
             medSwitch.setOnCheckedChangeListener(null);
             medSwitch.setChecked(settings.getAlarmEnabled(switchReminderKey));
@@ -83,8 +83,8 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.Remi
                     if (!isReminderEnabled) {
                         // cancel reminder
                         RemindersUtility.cancelMedReminder(compoundButton.getContext(),
-                                med.getReminderPendingIntentIds());
-                        med.setReminderPendingIntentIds(new ArrayList<Integer>());
+                                med.getReminderJobTags());
+                        med.setReminderJobTags(new ArrayList<String>());
                         FirebaseUtility.updateMedOnDb(med);
                         Log.i(LOG_TAG, "alarm disabled for: " + med.getKey());
                     } else {
@@ -96,7 +96,6 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.Remi
                     settings.setAlarmEnabled(switchReminderKey, isReminderEnabled);
                 }
             });
-            this.med = med;
         }
     }
 }

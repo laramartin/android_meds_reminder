@@ -11,7 +11,7 @@ public class Med {
     private String dosage;
     private String notes;
     private String key;
-    private List<Integer> reminderPendingIntentIds = new ArrayList<>();
+    private List<String> reminderJobTags = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -61,12 +61,12 @@ public class Med {
         this.key = key;
     }
 
-    public List<Integer> getReminderPendingIntentIds() {
-        return reminderPendingIntentIds;
+    public List<String> getReminderJobTags() {
+        return reminderJobTags;
     }
 
-    public void setReminderPendingIntentIds(List<Integer> reminderPendingIntentIds) {
-        this.reminderPendingIntentIds = reminderPendingIntentIds;
+    public void setReminderJobTags(List<String> reminderJobTags) {
+        this.reminderJobTags = reminderJobTags;
     }
 
     @Override
@@ -78,7 +78,7 @@ public class Med {
                 ", dosage='" + dosage + '\'' +
                 ", notes='" + notes + '\'' +
                 ", key='" + key + '\'' +
-                ", reminderPendingIntentIds=" + reminderPendingIntentIds +
+                ", reminderJobTags=" + reminderJobTags +
                 '}';
     }
 }

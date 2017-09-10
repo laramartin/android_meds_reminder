@@ -27,11 +27,18 @@
         <activity
             android:name=".reminders.RemindersActivity"
             android:label="@string/reminders_title"
-            android:theme="@style/ToolbarTheme"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/ToolbarTheme">
         </activity>
 
-        <receiver android:name=".reminders.ReminderReceiver"/>
+        <service
+            android:name=".reminders.ReminderIntentService"
+            android:exported="false"/>
+        <service android:name=".reminders.ReminderFirebaseJobService" android:exported="false">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

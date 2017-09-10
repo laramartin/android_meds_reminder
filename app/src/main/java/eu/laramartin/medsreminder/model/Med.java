@@ -1,9 +1,15 @@
 package eu.laramartin.medsreminder.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Med {
+public class Med implements Parcelable {
+
+    public Med() {
+    }
 
     private String name;
     private String time;
@@ -12,6 +18,28 @@ public class Med {
     private String notes;
     private String key;
     private List<String> reminderJobTags = new ArrayList<>();
+
+    protected Med(Parcel in) {
+        name = in.readString();
+        time = in.readString();
+        days = in.readString();
+        dosage = in.readString();
+        notes = in.readString();
+        key = in.readString();
+        reminderJobTags = in.createStringArrayList();
+    }
+
+    public static final Creator<Med> CREATOR = new Creator<Med>() {
+        @Override
+        public Med createFromParcel(Parcel in) {
+            return new Med(in);
+        }
+
+        @Override
+        public Med[] newArray(int size) {
+            return new Med[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -80,5 +108,21 @@ public class Med {
                 ", key='" + key + '\'' +
                 ", reminderJobTags=" + reminderJobTags +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(time);
+        parcel.writeString(days);
+        parcel.writeString(dosage);
+        parcel.writeString(notes);
+        parcel.writeString(key);
+        parcel.writeStringList(reminderJobTags);
     }
 }

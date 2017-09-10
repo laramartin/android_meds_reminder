@@ -31,7 +31,6 @@ public class RemindersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reminders);
         ButterKnife.bind(this);
 
-
         remindersAdapter = new RemindersAdapter(new Settings(this));
         recyclerView.setAdapter(remindersAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -44,7 +43,7 @@ public class RemindersActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-                for (DataSnapshot child: children) {
+                for (DataSnapshot child : children) {
                     Log.i("RemindersActivity", child.toString());
                     Med med = child.getValue(Med.class);
                     med.setKey(child.getKey());

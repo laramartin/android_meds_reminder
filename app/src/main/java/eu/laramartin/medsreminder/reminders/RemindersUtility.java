@@ -20,7 +20,7 @@ import eu.laramartin.medsreminder.firebase.FirebaseUtility;
 import eu.laramartin.medsreminder.model.Med;
 
 import static eu.laramartin.medsreminder.common.CalendarUtility.getMedDays;
-import static eu.laramartin.medsreminder.common.CalendarUtility.timeToNextGivenDay;
+import static eu.laramartin.medsreminder.common.CalendarUtility.millisToNextTargetDay;
 
 public class RemindersUtility {
 
@@ -57,7 +57,7 @@ public class RemindersUtility {
         int hours = Integer.valueOf(timeSplit[0]);
         int minutes = Integer.valueOf(timeSplit[1]);
 
-        int diffInSeconds = (int) (timeToNextGivenDay(calendarDay, hours, minutes) / 1000);
+        int diffInSeconds = (int) (millisToNextTargetDay(calendarDay, hours, minutes) / 1000);
 
         Driver driver = new GooglePlayDriver(context);
         FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(driver);

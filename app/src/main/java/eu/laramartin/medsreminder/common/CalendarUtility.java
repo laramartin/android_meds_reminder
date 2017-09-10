@@ -34,14 +34,14 @@ public class CalendarUtility {
         return weekDays;
     }
 
-    public static long timeToNextGivenDay(int targetDoW, int targetHoW, int targetMoW) {
+    public static long millisToNextTargetDay(int targetDayOfWeek, int targetHour, int targetMinute) {
         Calendar now = Calendar.getInstance();
         Calendar next = Calendar.getInstance();
         int nowDoW = now.get(Calendar.DAY_OF_WEEK);
-        int addDays = (targetDoW - nowDoW) % 7;
+        int addDays = (targetDayOfWeek - nowDoW) % 7;
         next.add(Calendar.DAY_OF_YEAR, addDays);
-        next.set(Calendar.HOUR_OF_DAY, targetHoW);
-        next.set(Calendar.MINUTE, targetMoW);
+        next.set(Calendar.HOUR_OF_DAY, targetHour);
+        next.set(Calendar.MINUTE, targetMinute);
 
         long date = next.getTimeInMillis();
         long diff = date - now.getTimeInMillis();
@@ -55,7 +55,6 @@ public class CalendarUtility {
 
         return diff;
     }
-
 
     public static List<Integer> getMedDays(Med med) {
         String medDays = med.getDays();

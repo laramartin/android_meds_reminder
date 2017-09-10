@@ -20,8 +20,6 @@ public class ReminderTasks {
     }
 
     private static void createMedReminder(Context context, Bundle bundleMed) {
-
-        // TODO: 10.09.17 Lara: schedule a job for same med in 7 days
         int calendarDay = bundleMed.getInt(context.getString(R.string.reminder_day_bundle_key));
         String time = bundleMed.getString(context.getString(R.string.reminder_time_bundle_key));
         String reminderJobTag = bundleMed.getString(context.getString(R.string.reminder_tag_bundle_key));

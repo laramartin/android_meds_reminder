@@ -52,10 +52,7 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.Remi
 
     @Override
     public int getItemCount() {
-        if (meds != null) {
-            return meds.size();
-        }
-        return 0;
+        return meds.size();
     }
 
     public class RemindersViewHolder extends RecyclerView.ViewHolder {
@@ -68,7 +65,6 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.Remi
         public RemindersViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
         }
 
         public void bind(final Med med) {

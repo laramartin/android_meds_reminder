@@ -64,7 +64,7 @@ class NotificationUtils {
     }
 
 //    private static NotificationCompat.Action ignoreReminderAction(Context context) {
-//        Intent ignoreReminderIntent = new Intent(context, MedReminderIntentService.class);
+//        Intent ignoreReminderIntent = new Intent(context, ReminderIntentService.class);
 //        ignoreReminderIntent.setAction(ReminderTasks.ACTION_DISMISS_NOTIFICATION);
 //        PendingIntent ignoreReminderPendingIntent = PendingIntent.getService(
 //                context,
@@ -78,7 +78,7 @@ class NotificationUtils {
 //    }
 
     static NotificationCompat.Action takeMedAction(Context context) {
-        Intent takeMedIntent = new Intent(context, ReminderReceiver.class);
+        Intent takeMedIntent = new Intent(context, ReminderIntentService.class);
         PendingIntent takeMedPendingIntent = PendingIntent.getService(
                 context,
                 ACTION_TAKE_MED_PENDING_INTENT_ID,

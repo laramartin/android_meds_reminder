@@ -15,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.common.Settings;
+import eu.laramartin.medsreminder.firebase.FirebaseUtility;
 import eu.laramartin.medsreminder.model.Med;
 
 import static eu.laramartin.medsreminder.reminders.RemindersUtility.buildSwitchReminderKey;
@@ -81,6 +82,11 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.Remi
             RemindersUtility.scheduleMedReminder(view.getContext(), med);
             String switchReminderKey = buildSwitchReminderKey(med);
             boolean isSwitchActivated = RemindersUtility.isSwitchActivated(view);
+            if (isSwitchActivated) {
+                RemindersUtility.cancelMedReminder(view.getContext(), med.getReminderPendingIntentIds());
+                med.setReminderPendingIntentIds(new ArrayList<Integer>());
+                FirebaseUtility.updateMedOnDb(med);
+            }
             settings.setAlarmEnabled(switchReminderKey, isSwitchActivated);
         }
     }

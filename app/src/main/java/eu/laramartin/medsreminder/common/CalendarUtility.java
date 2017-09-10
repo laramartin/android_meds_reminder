@@ -34,11 +34,6 @@ public class CalendarUtility {
         return weekDays;
     }
 
-    public static String[] getMedTimeSplit(Med med) {
-        String time = med.getTime();
-        return time.split(":");
-    }
-
     public static long timeToNextGivenDay(int targetDoW, int targetHoW, int targetMoW) {
         Calendar now = Calendar.getInstance();
         Calendar next = Calendar.getInstance();

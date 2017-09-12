@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,13 +86,22 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
         ConstraintLayout medsLayoutDetails;
         @BindView(R.id.icon_arrow_down)
         ImageView arrowDownIcon;
+        @BindView(R.id.meds_take_label)
+        TextView takeMedLabel;
+
         private MedsAdapterItem medsAdapterItem;
 
-        public MedViewHolder(View itemView) {
+        public MedViewHolder(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
+            takeMedLabel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(itemView.getContext(), medName.getText() + " taken!", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         @Override

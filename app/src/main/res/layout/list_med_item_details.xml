@@ -55,6 +55,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="31dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:text="@string/meds_take_title"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:textColor="@color/colorAccent"

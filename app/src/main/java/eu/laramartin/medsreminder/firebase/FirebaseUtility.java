@@ -23,6 +23,7 @@ import eu.laramartin.medsreminder.MainActivity;
 import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.meds.MedsAdapterItem;
 import eu.laramartin.medsreminder.model.Med;
+import eu.laramartin.medsreminder.model.Report;
 import eu.laramartin.medsreminder.model.User;
 
 import static android.support.v4.content.ContextCompat.startActivity;
@@ -103,6 +104,12 @@ public class FirebaseUtility {
                 .child("meds")
                 .push()
                 .setValue(med);
+    }
+    public static void writeReportOnDb(final Report report) {
+        getCurrentUserReference()
+                .child("reports")
+                .push()
+                .setValue(report);
     }
 
     public static void updateMedOnDb(final Med med) {

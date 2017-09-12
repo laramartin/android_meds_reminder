@@ -1,6 +1,8 @@
 package eu.laramartin.medsreminder.common;
 
 import eu.laramartin.medsreminder.R;
+import eu.laramartin.medsreminder.model.Med;
+import eu.laramartin.medsreminder.model.Report;
 
 public abstract class MedsUtility {
 
@@ -34,5 +36,15 @@ public abstract class MedsUtility {
                 break;
         }
         return iconId;
+    }
+
+    public static Report getReportFromMed(Med med) {
+        // TODO: 12.09.17 Lara: format date for report
+        // TODO: 12.09.17 Lara: replace hardcoded date with formatted date
+        Report report = new Report(
+                med.getName(),
+                "hardcoded date"
+        );
+        return report;
     }
 }

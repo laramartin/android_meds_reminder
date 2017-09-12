@@ -5,6 +5,7 @@ import android.media.AudioManager;
 import android.os.Vibrator;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +22,11 @@ import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.common.DialogsUtility;
 import eu.laramartin.medsreminder.common.MedsUtility;
 import eu.laramartin.medsreminder.model.Med;
+import eu.laramartin.medsreminder.model.Report;
 
 import static android.content.Context.VIBRATOR_SERVICE;
+import static eu.laramartin.medsreminder.common.MedsUtility.getReportFromMed;
+import static eu.laramartin.medsreminder.firebase.FirebaseUtility.writeReportOnDb;
 
 public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder> {
 
@@ -99,7 +103,10 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
             takeMedLabel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Report report = getReportFromMed(medsAdapterItem.getMed());
+                    writeReportOnDb(report);
                     Toast.makeText(itemView.getContext(), medName.getText() + " taken!", Toast.LENGTH_SHORT).show();
+                    Log.i("MedsAdapter", "report: " + report.toString());
                 }
             });
         }

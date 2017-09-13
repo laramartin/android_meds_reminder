@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.laramartin.medsreminder.meds.MedsFragment;
+import eu.laramartin.medsreminder.reports.ReportsFragment;
 
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.getLoginIntent;
 
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                         openFragment(new FriendsFragment());
                         return true;
                     case R.id.menu_report:
-                        openFragment(new ReportFragment());
+                        openFragment(new ReportsFragment());
                         return true;
                 }
                 return false;

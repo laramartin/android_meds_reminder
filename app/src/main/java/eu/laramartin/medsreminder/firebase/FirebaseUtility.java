@@ -123,6 +123,10 @@ public class FirebaseUtility {
         return getCurrentUserReference().child("meds");
     }
 
+    public static DatabaseReference getReportsReference() {
+        return getCurrentUserReference().child("reports");
+    }
+
     public static void removeMed(MedsAdapterItem medsAdapterItem) {
         String key = medsAdapterItem.getMed().getKey();
         getMedsReference().child(key).removeValue();

@@ -41,10 +41,9 @@ public abstract class MedsUtility {
     public static Report getReportFromMed(Med med) {
         // TODO: 12.09.17 Lara: format date for report
         // TODO: 12.09.17 Lara: replace hardcoded date with formatted date
-        Report report = new Report(
-                med.getName(),
-                "hardcoded date"
-        );
+        Report report = new Report();
+        report.setMedName(med.getName());
+        report.setTimeTaken("hardcoded date");
         return report;
     }
 }

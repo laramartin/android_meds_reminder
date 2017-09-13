@@ -4,6 +4,8 @@ import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.model.Med;
 import eu.laramartin.medsreminder.model.Report;
 
+import static eu.laramartin.medsreminder.common.CalendarUtility.getFormattedDateWithHour;
+
 public abstract class MedsUtility {
 
     public static int getMedIcon(String selectedDosage) {
@@ -39,11 +41,10 @@ public abstract class MedsUtility {
     }
 
     public static Report getReportFromMed(Med med) {
-        // TODO: 12.09.17 Lara: format date for report
-        // TODO: 12.09.17 Lara: replace hardcoded date with formatted date
+        String formattedDate = getFormattedDateWithHour();
         Report report = new Report();
         report.setMedName(med.getName());
-        report.setTimeTaken("hardcoded date");
+        report.setTimeTaken(formattedDate);
         return report;
     }
 }

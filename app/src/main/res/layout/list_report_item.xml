@@ -10,24 +10,24 @@
         android:id="@+id/report_med_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Lorem Ipsum med"
-        android:layout_marginLeft="16dp"/>
+        tools:text="Lorem Ipsum med"/>
 
     <TextView
         android:id="@+id/report_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="7dp"
         app:layout_constraintLeft_toLeftOf="@+id/report_med_name"
         app:layout_constraintTop_toBottomOf="@+id/report_med_name"
-        tools:text="14/08/2017 22:30"
-        android:layout_marginLeft="16dp"/>
+        tools:text="14/08/2017 22:30"/>
 
     <ImageView
         android:layout_width="@dimen/icon_medium"

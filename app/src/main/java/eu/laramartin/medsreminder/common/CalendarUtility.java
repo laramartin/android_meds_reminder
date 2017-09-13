@@ -1,7 +1,9 @@
 package eu.laramartin.medsreminder.common;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import eu.laramartin.medsreminder.model.Med;
@@ -59,5 +61,11 @@ public class CalendarUtility {
     public static List<Integer> getMedDays(Med med) {
         String medDays = med.getDays();
         return getDaysOfWeek(medDays);
+    }
+
+    public static String getFormattedDateWithHour() {
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm");
+        return dateFormat.format(date);
     }
 }

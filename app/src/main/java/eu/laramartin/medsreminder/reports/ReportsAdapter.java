@@ -39,10 +39,7 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportsH
 
     @Override
     public int getItemCount() {
-        if (reports != null) {
-            return reports.size();
-        }
-        return 0;
+        return reports.size();
     }
 
     public class ReportsHolder extends RecyclerView.ViewHolder {

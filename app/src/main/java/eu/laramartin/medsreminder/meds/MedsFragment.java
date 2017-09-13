@@ -5,15 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,16 +21,15 @@ import com.google.firebase.database.DatabaseReference;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import eu.laramartin.medsreminder.BaseFragment;
 import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.model.Med;
-import eu.laramartin.medsreminder.reminders.RemindersActivity;
 
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.createUserIfDoesntExist;
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.getMedsReference;
-import static eu.laramartin.medsreminder.firebase.FirebaseUtility.signOut;
 
 
-public class MedsFragment extends Fragment {
+public class MedsFragment extends BaseFragment {
 
     private static final String LOG_TAG = MedsFragment.class.getCanonicalName();
     @BindView(R.id.collapsing_toolbar_layout)
@@ -119,24 +114,5 @@ public class MedsFragment extends Fragment {
         super.onDestroyView();
         unbinder.unbind();
         medsReference.removeEventListener(medsChildEventListener);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.action_bar_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_logout:
-                signOut(getContext());
-                return true;
-            case R.id.menu_reminders:
-                Intent intent = new Intent(getActivity(), RemindersActivity.class);
-                startActivity(intent);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

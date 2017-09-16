@@ -1,14 +1,12 @@
 package eu.laramartin.medsreminder.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class User {
 
     private String id;
     private String email;
-    private List<Take> takes = new ArrayList<>();
-    private List<String> allowedUsersPerEmail = new ArrayList<>();
+//    private List<Med> meds = new ArrayList<>();
+//    private List<Report> reports = new ArrayList<>();
+//    private List<Permission> permissions = new ArrayList<>();
 
     public String getId() {
         return id;
@@ -26,29 +24,47 @@ public class User {
         this.email = email;
     }
 
-    public List<Take> getTakes() {
-        return takes;
-    }
+//    public List<Report> getReports() {
+//        return reports;
+//    }
+//
+//    public void setReports(List<Report> reports) {
+//        this.reports = reports;
+//    }
+//
+//    public List<Permission> getPermissions() {
+//        return permissions;
+//    }
+//
+//    public void setPermissions(List<Permission> permissions) {
+//        this.permissions = permissions;
+//    }
+//
+//    public List<Med> getMeds() {
+//        return meds;
+//    }
+//
+//    public void setMeds(List<Med> meds) {
+//        this.meds = meds;
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return "User{" +
+//                "id='" + id + '\'' +
+//                ", email='" + email + '\'' +
+//                ", meds=" + meds +
+//                ", reports=" + reports +
+//                ", permissions=" + permissions +
+//                '}';
+//    }
 
-    public void setTakes(List<Take> takes) {
-        this.takes = takes;
-    }
-
-    public List<String> getAllowedUsersPerEmail() {
-        return allowedUsersPerEmail;
-    }
-
-    public void setAllowedUsersPerEmail(List<String> allowedUsersPerEmail) {
-        this.allowedUsersPerEmail = allowedUsersPerEmail;
-    }
 
     @Override
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
                 ", email='" + email + '\'' +
-                ", takes=" + takes +
-                ", allowedUsersPerEmail=" + allowedUsersPerEmail +
                 '}';
     }
 }

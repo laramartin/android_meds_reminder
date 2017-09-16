@@ -10,6 +10,7 @@ import android.widget.EditText;
 import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.firebase.FirebaseUtility;
 import eu.laramartin.medsreminder.meds.MedsAdapterItem;
+import eu.laramartin.medsreminder.model.Permission;
 
 public class DialogsUtility {
 
@@ -48,6 +49,9 @@ public class DialogsUtility {
                 // TODO: 16.09.17 Lara: invite friend
                 String email = input.getText().toString();
                 Log.i("Permissions dialog", "Email: " + email);
+                Permission permission = new Permission();
+                permission.setEmail(email);
+                FirebaseUtility.writePermissionOnDb(permission);
             }
         });
         builder.setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {

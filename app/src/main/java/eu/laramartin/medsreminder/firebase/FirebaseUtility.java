@@ -23,7 +23,6 @@ import eu.laramartin.medsreminder.MainActivity;
 import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.meds.MedsAdapterItem;
 import eu.laramartin.medsreminder.model.Med;
-import eu.laramartin.medsreminder.model.Permission;
 import eu.laramartin.medsreminder.model.Report;
 import eu.laramartin.medsreminder.model.User;
 
@@ -113,9 +112,10 @@ public class FirebaseUtility {
                 .setValue(report);
     }
 
-    public static void writePermissionOnDb(final Permission email) {
+    public static void writePermissionOnDb(final String email) {
         getCurrentUserReference()
                 .child("permissions")
+                .push()
                 .setValue(email);
     }
 
@@ -137,5 +137,16 @@ public class FirebaseUtility {
     public static void removeMed(MedsAdapterItem medsAdapterItem) {
         String key = medsAdapterItem.getMed().getKey();
         getMedsReference().child(key).removeValue();
+    }
+
+    public static DatabaseReference getUserRootDatabaseReference() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        return database.getReference("user");
+    }
+
+    // TODO: 16.09.17 Lara:
+    public static String getCurrentUserEmail() {
+        final FirebaseUser firebaseUser = getFirebaseUser();
+        return firebaseUser.getEmail();
     }
 }

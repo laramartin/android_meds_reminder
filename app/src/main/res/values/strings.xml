@@ -66,4 +66,7 @@
 
     <!-- Permissions screen -->
     <string name="permissions_screen_title">Permissions</string>
+    <string name="dialog_give_permissions_to_friend">Give permissions to your love ones so they are able to see your next med and the last takes.</string>
+    <string name="dialog_accept">Accept</string>
+    <string name="dialog_permissions_title">Grant permissions to a friend</string>
 </resources>

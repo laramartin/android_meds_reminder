@@ -41,6 +41,13 @@
                 <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".permissions.PermissionsActivity"
+            android:label="@string/permissions_screen_title"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/ToolbarTheme">
+        </activity>
     </application>
 
 </manifest>

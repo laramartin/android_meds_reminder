@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import eu.laramartin.medsreminder.permissions.PermissionsActivity;
 import eu.laramartin.medsreminder.reminders.RemindersActivity;
 
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.signOut;
@@ -24,9 +25,12 @@ public abstract class BaseFragment extends Fragment {
                 signOut(getContext());
                 return true;
             case R.id.menu_reminders:
-                Intent intent = new Intent(getActivity(), RemindersActivity.class);
-                startActivity(intent);
+                Intent remindersIntent = new Intent(getActivity(), RemindersActivity.class);
+                startActivity(remindersIntent);
                 return true;
+            case R.id.menu_permissions:
+                Intent permissionsIntent = new Intent(getActivity(), PermissionsActivity.class);
+                startActivity(permissionsIntent);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -53,6 +53,7 @@
 
     <!-- Menu -->
     <string name="menu_reminders">Reminders</string>
+    <string name="menu_permissions">Permissions</string>
     <string name="menu_logout">Logout</string>
 
     <!-- Reminders screen -->
@@ -63,4 +64,6 @@
     <string name="reminder_time_bundle_key">reminder_time_key</string>
     <string name="reminder_tag_bundle_key">reminder_id_key</string>
 
+    <!-- Permissions screen -->
+    <string name="permissions_screen_title">Permissions</string>
 </resources>

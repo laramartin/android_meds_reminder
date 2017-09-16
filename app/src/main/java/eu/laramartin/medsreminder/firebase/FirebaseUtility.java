@@ -23,6 +23,7 @@ import eu.laramartin.medsreminder.MainActivity;
 import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.meds.MedsAdapterItem;
 import eu.laramartin.medsreminder.model.Med;
+import eu.laramartin.medsreminder.model.Permission;
 import eu.laramartin.medsreminder.model.Report;
 import eu.laramartin.medsreminder.model.User;
 
@@ -110,6 +111,12 @@ public class FirebaseUtility {
                 .child("reports")
                 .push()
                 .setValue(report);
+    }
+
+    public static void writePermissionOnDb(final Permission email) {
+        getCurrentUserReference()
+                .child("permissions")
+                .setValue(email);
     }
 
     public static void updateMedOnDb(final Med med) {

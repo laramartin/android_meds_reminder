@@ -70,4 +70,7 @@
 
     <!-- Permissions screen -->
     <string name="permissions_screen_title">Permissions</string>
+
+    <!-- Friends screen -->
+    <string name="last_takes_label">Last 5 takes</string>
 </resources>

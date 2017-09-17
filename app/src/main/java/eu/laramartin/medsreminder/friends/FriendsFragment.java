@@ -67,10 +67,12 @@ public class FriendsFragment extends BaseFragment {
                     DataSnapshot permissions = currentSnapshot.child("permissions");
                     if (permissions.exists()) {
                         for (DataSnapshot permission : permissions.getChildren()) {
-                            if (permission.getValue().equals(FirebaseUtility.getCurrentUserEmail())) {
-                                User userThatGavePermission = currentSnapshot.getValue(User.class);
-                                friendsAdapter.add(userThatGavePermission);
-                                Log.i(LOG_TAG, "User that gave permission: " + userThatGavePermission.toString());
+                            if (permission.child("email").exists()) {
+                                if (permission.child("email").getValue().equals(FirebaseUtility.getCurrentUserEmail())) {
+                                    User userThatGavePermission = currentSnapshot.getValue(User.class);
+                                    friendsAdapter.add(userThatGavePermission);
+                                    Log.i(LOG_TAG, "User that gave permission: " + userThatGavePermission.toString());
+                                }
                             }
                         }
                     }

@@ -25,6 +25,7 @@ import eu.laramartin.medsreminder.meds.MedsAdapterItem;
 import eu.laramartin.medsreminder.model.Med;
 import eu.laramartin.medsreminder.model.Report;
 import eu.laramartin.medsreminder.model.User;
+import eu.laramartin.medsreminder.model.Permission;
 
 import static android.support.v4.content.ContextCompat.startActivity;
 
@@ -112,11 +113,16 @@ public class FirebaseUtility {
                 .setValue(report);
     }
 
-    public static void writePermissionOnDb(final String email) {
-        getCurrentUserReference()
+    public static void writePermissionOnDb(final Permission permission) {
+        String key = getCurrentUserReference()
                 .child("permissions")
                 .push()
-                .setValue(email);
+                .getKey();
+        permission.setKey(key);
+        getCurrentUserReference()
+                .child("permissions")
+                .child(key)
+                .setValue(permission);
     }
 
     public static void updateMedOnDb(final Med med) {
@@ -124,6 +130,13 @@ public class FirebaseUtility {
                 .child("meds")
                 .child(med.getKey())
                 .setValue(med);
+    }
+
+    public static void updatePermissionOnDb(final Permission permission) {
+        getCurrentUserReference()
+                .child("permissions")
+                .child(permission.getKey())
+                .setValue(permission);
     }
 
     public static DatabaseReference getMedsReference() {
@@ -148,9 +161,13 @@ public class FirebaseUtility {
         return database.getReference("user");
     }
 
-    // TODO: 16.09.17 Lara:
     public static String getCurrentUserEmail() {
         final FirebaseUser firebaseUser = getFirebaseUser();
         return firebaseUser.getEmail();
+    }
+
+    public static void removePermission(Permission permission) {
+        String key = permission.getKey();
+        getPermissionssReference().child(key).removeValue();
     }
 }

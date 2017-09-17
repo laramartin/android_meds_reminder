@@ -10,6 +10,7 @@ import android.widget.EditText;
 import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.firebase.FirebaseUtility;
 import eu.laramartin.medsreminder.meds.MedsAdapterItem;
+import eu.laramartin.medsreminder.model.Permission;
 
 public class DialogsUtility {
 
@@ -45,7 +46,28 @@ public class DialogsUtility {
                 // TODO: 16.09.17 Lara: invite friend via intent email
                 String email = input.getText().toString();
                 Log.i("Permissions dialog", "Email: " + email);
-                FirebaseUtility.writePermissionOnDb(email);
+                Permission permission = new Permission();
+                permission.setEmail(email);
+                FirebaseUtility.writePermissionOnDb(permission);
+            }
+        });
+        builder.setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    public static void showRevokePermissionDialog(Context context, final Permission permission) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(context.getString(R.string.dialog_delete_permission_description, permission.getEmail()));
+        builder.setPositiveButton(R.string.dialog_delete_confirm, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                FirebaseUtility.removePermission(permission);
             }
         });
         builder.setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {

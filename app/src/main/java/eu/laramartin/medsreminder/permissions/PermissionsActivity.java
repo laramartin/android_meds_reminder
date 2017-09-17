@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.common.DialogsUtility;
 import eu.laramartin.medsreminder.firebase.FirebaseUtility;
+import eu.laramartin.medsreminder.model.Permission;
 
 public class PermissionsActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -48,8 +49,12 @@ public class PermissionsActivity extends AppCompatActivity implements View.OnCli
         permissionsReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                String emailGivenPermission = dataSnapshot.getValue(String.class);
-                permissionsAdapter.add(emailGivenPermission);
+                Permission permission = dataSnapshot.getValue(Permission.class);
+                permission.setKey(dataSnapshot.getKey());
+                if (dataSnapshot != null) {
+                    permissionsAdapter.add(permission);
+                }
+                FirebaseUtility.updatePermissionOnDb(permission);
             }
 
             @Override
@@ -59,6 +64,9 @@ public class PermissionsActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
+                Permission permission = dataSnapshot.getValue(Permission.class);
+                permission.setKey(dataSnapshot.getKey());
+                permissionsAdapter.remove(permission);
 
             }
 

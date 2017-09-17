@@ -51,16 +51,6 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
 
         @BindView(R.id.friend_email_text)
         TextView friendEmailTextView;
-//        @BindView(R.id.friend_take_text_1)
-//        TextView friendTakeOne;
-//        @BindView(R.id.friend_take_text_2)
-//        TextView friendTakeTwo;
-//        @BindView(R.id.friend_take_text_3)
-//        TextView friendTakeThree;
-//        @BindView(R.id.friend_take_text_4)
-//        TextView friendTakeFour;
-//        @BindView(R.id.friend_take_text_5)
-//        TextView friendTakeFive;
         @BindViews({R.id.friend_take_text_1, R.id.friend_take_text_2, R.id.friend_take_text_3, R.id.friend_take_text_4, R.id.friend_take_text_5})
         List<TextView> takesTextViews;
 
@@ -70,6 +60,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
         }
 
         public void bind(User friendUser) {
+            hideTakesTextViews();
             friendEmailTextView.setText(friendUser.getEmail());
 
             // TODO: 17.09.17 Lara: assert if friend has reports
@@ -77,7 +68,14 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
             if (friendUser.getReports() != null) {
                 displayFriendReports(friendUser.getReports());
             } else {
+                takesTextViews.get(0).setVisibility(View.VISIBLE);
                 takesTextViews.get(0).setText(R.string.friends_takes_empty);
+            }
+        }
+
+        private void hideTakesTextViews() {
+            for (TextView takeTextView : takesTextViews) {
+                takeTextView.setVisibility(View.GONE);
             }
         }
 

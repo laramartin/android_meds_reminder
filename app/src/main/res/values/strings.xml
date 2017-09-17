@@ -73,4 +73,5 @@
 
     <!-- Friends screen -->
     <string name="last_takes_label">Last 5 takes</string>
+    <string name="friends_takes_empty">Nothing to show</string>
 </resources>

@@ -8,11 +8,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 import eu.laramartin.medsreminder.R;
+import eu.laramartin.medsreminder.model.Report;
 import eu.laramartin.medsreminder.model.User;
 
 public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsViewHolder> {
@@ -21,7 +25,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
 
     public void add(User friend) {
         friends.add(friend);
-        notifyItemInserted(friends.size() -1);
+        notifyItemInserted(friends.size() - 1);
     }
 
     @Override
@@ -46,6 +50,20 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
 
         @BindView(R.id.friend_email_text)
         TextView friendEmailTextView;
+//        @BindView(R.id.friend_take_text_1)
+//        TextView friendTakeOne;
+//        @BindView(R.id.friend_take_text_2)
+//        TextView friendTakeTwo;
+//        @BindView(R.id.friend_take_text_3)
+//        TextView friendTakeThree;
+//        @BindView(R.id.friend_take_text_4)
+//        TextView friendTakeFour;
+//        @BindView(R.id.friend_take_text_5)
+//        TextView friendTakeFive;
+        @BindViews({R.id.friend_take_text_1, R.id.friend_take_text_2, R.id.friend_take_text_3, R.id.friend_take_text_4, R.id.friend_take_text_5})
+        List<TextView> takesTextViews;
+
+        private Map<String, Report> friendReports = new HashMap<>();
 
         public FriendsViewHolder(View itemView) {
             super(itemView);
@@ -54,6 +72,21 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
 
         public void bind(User friendUser) {
             friendEmailTextView.setText(friendUser.getEmail());
+
+            // TODO: 17.09.17 Lara: assert if friend has reports
+            // TODO: 17.09.17 Lara: display reports if available
+            if (friendUser.getReports() != null) {
+                friendReports = friendUser.getReports();
+                displayFriendReports();
+            } else {
+                takesTextViews.get(0).setText(R.string.friends_takes_empty);
+            }
+        }
+
+        private void displayFriendReports() {
+            for (int i = 0; i < 5; i++) {
+//                if ()
+            }
         }
     }
 }

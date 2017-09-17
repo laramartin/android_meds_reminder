@@ -1,4 +1,4 @@
-package eu.laramartin.medsreminder.permissions;
+package eu.laramartin.medsreminder.friends;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

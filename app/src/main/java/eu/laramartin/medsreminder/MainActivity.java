@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.laramartin.medsreminder.meds.MedsFragment;
+import eu.laramartin.medsreminder.permissions.FriendsFragment;
 import eu.laramartin.medsreminder.reports.ReportsFragment;
 
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.getLoginIntent;

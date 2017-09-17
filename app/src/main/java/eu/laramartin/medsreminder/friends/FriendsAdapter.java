@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -63,8 +64,6 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
         @BindViews({R.id.friend_take_text_1, R.id.friend_take_text_2, R.id.friend_take_text_3, R.id.friend_take_text_4, R.id.friend_take_text_5})
         List<TextView> takesTextViews;
 
-        private Map<String, Report> friendReports = new HashMap<>();
-
         public FriendsViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -76,16 +75,30 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
             // TODO: 17.09.17 Lara: assert if friend has reports
             // TODO: 17.09.17 Lara: display reports if available
             if (friendUser.getReports() != null) {
-                friendReports = friendUser.getReports();
-                displayFriendReports();
+                displayFriendReports(friendUser.getReports());
             } else {
                 takesTextViews.get(0).setText(R.string.friends_takes_empty);
             }
         }
 
-        private void displayFriendReports() {
-            for (int i = 0; i < 5; i++) {
-//                if ()
+        private void displayFriendReports(Map<String, Report> reports) {
+            // Convert Firebase Map to a list to order it
+            List<Report> reportsCol = new ArrayList<>(reports.values());
+            // Sort using a comparator that compares the timeTaken property
+            Collections.sort(reportsCol, new Comparator<Report>() {
+                @Override
+                public int compare(Report r1, Report r2) {
+                    // Sort alphabetically reversed
+                    return r2.getTimeTaken().compareTo(r1.getTimeTaken());
+                }
+            });
+
+            // Take 5 reports maximum because we have 5 TextViews
+            int limit = Math.min(reportsCol.size(), 5);
+            for (int i = 0; i < limit; i++) {
+                String text = reportsCol.get(i).getMedName().concat("\n").concat(reportsCol.get(i).getTimeTaken());
+                takesTextViews.get(i).setText(text);
+                takesTextViews.get(i).setVisibility(View.VISIBLE);
             }
         }
     }

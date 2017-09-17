@@ -21,6 +21,8 @@ public class PermissionsActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_permissions);
         ButterKnife.bind(this);
 
+        // TODO: 17.09.17 Lara: implement recyclerview
+
         fab.setOnClickListener(this);
     }
 

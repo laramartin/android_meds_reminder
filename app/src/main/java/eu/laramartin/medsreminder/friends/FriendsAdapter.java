@@ -1,4 +1,4 @@
-package eu.laramartin.medsreminder.permissions;
+package eu.laramartin.medsreminder.friends;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

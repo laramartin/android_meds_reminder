@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
 import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.model.User;
 
@@ -40,11 +41,17 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
     }
 
     public class FriendsViewHolder extends RecyclerView.ViewHolder {
+//
+//        @BindView(R.id.)
+//        TextView friendEmailTextView;
+//        @BindView()
+
         public FriendsViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
         }
 
-        public void bind(User user) {
+        public void bind(User friendUser) {
 
         }
     }

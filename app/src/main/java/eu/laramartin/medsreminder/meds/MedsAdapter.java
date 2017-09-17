@@ -1,8 +1,6 @@
 package eu.laramartin.medsreminder.meds;
 
 import android.content.Context;
-import android.media.AudioManager;
-import android.os.Vibrator;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,8 +22,8 @@ import eu.laramartin.medsreminder.common.MedsUtility;
 import eu.laramartin.medsreminder.model.Med;
 import eu.laramartin.medsreminder.model.Report;
 
-import static android.content.Context.VIBRATOR_SERVICE;
 import static eu.laramartin.medsreminder.common.MedsUtility.getReportFromMed;
+import static eu.laramartin.medsreminder.common.Utils.setVibration;
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.writeReportOnDb;
 
 public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder> {
@@ -162,13 +160,7 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
         @Override
         public boolean onLongClick(View view) {
             DialogsUtility.showRemoveMedDialog(view.getContext(), medsAdapterItem);
-            AudioManager am = (AudioManager) view.getContext().getSystemService(Context.AUDIO_SERVICE);
-            switch (am.getRingerMode()) {
-                case AudioManager.RINGER_MODE_VIBRATE:
-                case AudioManager.RINGER_MODE_NORMAL:
-                    ((Vibrator) view.getContext().getSystemService(VIBRATOR_SERVICE)).vibrate(100);
-                    return true;
-            }
+            setVibration(view);
             return true;
         }
     }

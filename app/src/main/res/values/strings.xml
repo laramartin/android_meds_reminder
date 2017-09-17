@@ -50,6 +50,10 @@
     <string name="dialog_delete_med_description">Are you sure you want to remove this med? You will lose all the med data.</string>
     <string name="dialog_delete_confirm">Delete</string>
     <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_give_permissions_to_friend">Give permissions to your love ones so they are able to see your next med and the last takes.</string>
+    <string name="dialog_accept">Accept</string>
+    <string name="dialog_permissions_title">Grant permissions to a friend</string>
+    <string name="dialog_delete_permission_description">Are you sure you want to revoke permissions from %s? Your friend will lose access to see your meds.</string>
 
     <!-- Menu -->
     <string name="menu_reminders">Reminders</string>
@@ -66,7 +70,4 @@
 
     <!-- Permissions screen -->
     <string name="permissions_screen_title">Permissions</string>
-    <string name="dialog_give_permissions_to_friend">Give permissions to your love ones so they are able to see your next med and the last takes.</string>
-    <string name="dialog_accept">Accept</string>
-    <string name="dialog_permissions_title">Grant permissions to a friend</string>
 </resources>

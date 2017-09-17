@@ -34,7 +34,7 @@ public class MedsFragment extends BaseFragment {
     private static final String LOG_TAG = MedsFragment.class.getCanonicalName();
     @BindView(R.id.collapsing_toolbar_layout)
     CollapsingToolbarLayout toolbarLayout;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.meds_toolbar)
     Toolbar toolbar;
     @BindView(R.id.fab_meds)
     FloatingActionButton fab;

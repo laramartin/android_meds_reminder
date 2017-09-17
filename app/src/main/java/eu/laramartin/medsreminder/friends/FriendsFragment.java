@@ -16,9 +16,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -32,13 +29,13 @@ public class FriendsFragment extends BaseFragment {
 
     private static final String LOG_TAG = FriendsFragment.class.getCanonicalName();
     private ValueEventListener valueEventListener;
-    private List<User> usersThatGavePermission = new ArrayList<>();
+//    private List<User> usersThatGavePermission = new ArrayList<>();
     private Unbinder unbinder;
     private FriendsAdapter friendsAdapter;
 
     @BindView(R.id.friends_recyclerview)
     RecyclerView recyclerView;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.friends_toolbar)
     Toolbar toolbar;
 
 
@@ -72,7 +69,7 @@ public class FriendsFragment extends BaseFragment {
                         for (DataSnapshot permission : permissions.getChildren()) {
                             if (permission.getValue().equals(FirebaseUtility.getCurrentUserEmail())) {
                                 User userThatGavePermission = currentSnapshot.getValue(User.class);
-                                usersThatGavePermission.add(userThatGavePermission);
+                                friendsAdapter.add(userThatGavePermission);
                                 Log.i(LOG_TAG, "User that gave permission: " + userThatGavePermission.toString());
                             }
                         }

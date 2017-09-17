@@ -29,7 +29,7 @@ public class ReportsFragment extends BaseFragment {
 
     private static final String LOG_TAG = ReportsFragment.class.getCanonicalName();
 
-    @BindView(R.id.toolbar)
+    @BindView(R.id.reports_toolbar)
     Toolbar toolbar;
     @BindView(R.id.reports_recyclerview)
     RecyclerView recyclerView;

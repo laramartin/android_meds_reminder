@@ -42,10 +42,7 @@ public class DialogsUtility {
         builder.setMessage(R.string.dialog_give_permissions_to_friend);
         builder.setPositiveButton(R.string.dialog_accept, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // TODO: 16.09.17 Lara: assert that input is email
-
-                // TODO: 16.09.17 Lara: save email to db
-                // TODO: 16.09.17 Lara: invite friend
+                // TODO: 16.09.17 Lara: invite friend via intent email
                 String email = input.getText().toString();
                 Log.i("Permissions dialog", "Email: " + email);
                 FirebaseUtility.writePermissionOnDb(email);

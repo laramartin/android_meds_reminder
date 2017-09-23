@@ -9,7 +9,7 @@ import static android.content.Context.VIBRATOR_SERVICE;
 
 public class Utils {
 
-    public static void setVibration(View view) {
+    public static void runVibration(View view) {
         AudioManager am = (AudioManager) view.getContext().getSystemService(Context.AUDIO_SERVICE);
         switch (am.getRingerMode()) {
             case AudioManager.RINGER_MODE_VIBRATE:

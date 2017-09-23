@@ -63,8 +63,6 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
             hideTakesTextViews();
             friendEmailTextView.setText(friendUser.getEmail());
 
-            // TODO: 17.09.17 Lara: assert if friend has reports
-            // TODO: 17.09.17 Lara: display reports if available
             if (friendUser.getReports() != null) {
                 displayFriendReports(friendUser.getReports());
             } else {

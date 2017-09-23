@@ -23,7 +23,7 @@ import eu.laramartin.medsreminder.model.Med;
 import eu.laramartin.medsreminder.model.Report;
 
 import static eu.laramartin.medsreminder.common.MedsUtility.getReportFromMed;
-import static eu.laramartin.medsreminder.common.Utils.setVibration;
+import static eu.laramartin.medsreminder.common.Utils.runVibration;
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.writeReportOnDb;
 
 public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder> {
@@ -160,7 +160,7 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
         @Override
         public boolean onLongClick(View view) {
             DialogsUtility.showRemoveMedDialog(view.getContext(), medsAdapterItem);
-            setVibration(view);
+            runVibration(view);
             return true;
         }
     }

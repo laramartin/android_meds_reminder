@@ -16,7 +16,7 @@ import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.common.DialogsUtility;
 import eu.laramartin.medsreminder.model.Permission;
 
-import static eu.laramartin.medsreminder.common.Utils.setVibration;
+import static eu.laramartin.medsreminder.common.Utils.runVibration;
 
 public class PermissionsAdapter extends RecyclerView.Adapter<PermissionsAdapter.PermissionsViewHolder> {
 
@@ -69,14 +69,13 @@ public class PermissionsAdapter extends RecyclerView.Adapter<PermissionsAdapter.
 
         public void bind(Permission permission) {
             this.permission = permission;
-
             emailTextView.setText(permission.getEmail());
         }
 
         @Override
         public boolean onLongClick(View view) {
             DialogsUtility.showRevokePermissionDialog(view.getContext(), permission);
-            setVibration(view);
+            runVibration(view);
             return false;
         }
     }

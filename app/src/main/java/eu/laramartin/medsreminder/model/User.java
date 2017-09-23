@@ -6,9 +6,7 @@ public class User {
 
     private String id;
     private String email;
-//    private List<Med> meds = new ArrayList<>();
     private Map<String, Report> reports;
-//    private List<Permission> permissions = new ArrayList<>();
 
     public String getId() {
         return id;

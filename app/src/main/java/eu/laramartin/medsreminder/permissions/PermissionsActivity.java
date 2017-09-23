@@ -29,7 +29,6 @@ public class PermissionsActivity extends AppCompatActivity implements View.OnCli
     private DatabaseReference permissionsReference;
     private PermissionsAdapter permissionsAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +66,6 @@ public class PermissionsActivity extends AppCompatActivity implements View.OnCli
                 Permission permission = dataSnapshot.getValue(Permission.class);
                 permission.setKey(dataSnapshot.getKey());
                 permissionsAdapter.remove(permission);
-
             }
 
             @Override

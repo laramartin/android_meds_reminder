@@ -15,69 +15,69 @@ import eu.laramartin.medsreminder.model.Permission;
 public class DialogsUtility {
 
     public static void showRemoveMedDialog(Context context, final MedsAdapterItem medsAdapterItem) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage(R.string.dialog_delete_med_description);
-        builder.setPositiveButton(R.string.dialog_delete_confirm, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                FirebaseUtility.removeMed(medsAdapterItem);
-            }
-        });
-        builder.setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                if (dialog != null) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        new AlertDialog.Builder(context)
+                .setMessage(R.string.dialog_delete_med_description)
+                .setPositiveButton(R.string.dialog_delete_confirm, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        FirebaseUtility.removeMed(medsAdapterItem);
+                    }
+                })
+                .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        if (dialog != null) {
+                            dialog.dismiss();
+                        }
+                    }
+                })
+                .create()
+                .show();
     }
 
     public static void showInviteFriendDialog(Context context) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(R.string.dialog_permissions_title);
         final EditText input = new EditText(context);
         input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-        builder.setView(input);
 
-        builder.setMessage(R.string.dialog_give_permissions_to_friend);
-        builder.setPositiveButton(R.string.dialog_accept, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                // TODO: 16.09.17 Lara: invite friend via intent email
-                String email = input.getText().toString();
-                Log.i("Permissions dialog", "Email: " + email);
-                Permission permission = new Permission();
-                permission.setEmail(email);
-                FirebaseUtility.writePermissionOnDb(permission);
-            }
-        });
-        builder.setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                if (dialog != null) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        new AlertDialog.Builder(context)
+            .setTitle(R.string.dialog_permissions_title)
+            .setView(input)
+                .setMessage(R.string.dialog_give_permissions_to_friend)
+                .setPositiveButton(R.string.dialog_accept, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // TODO: 16.09.17 Lara: invite friend via intent email
+                        String email = input.getText().toString();
+                        String email = input.getText().toString();
+                        Permission permission = new Permission();
+                        permission.setEmail(email);
+                        FirebaseUtility.writePermissionOnDb(permission);
+                    }
+                })
+                .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        if (dialog != null) {
+                            dialog.dismiss();
+                        }
+                    }
+                })
+                .create()
+                .show();
     }
 
     public static void showRevokePermissionDialog(Context context, final Permission permission) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage(context.getString(R.string.dialog_delete_permission_description, permission.getEmail()));
-        builder.setPositiveButton(R.string.dialog_delete_confirm, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                FirebaseUtility.removePermission(permission);
-            }
-        });
-        builder.setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                if (dialog != null) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        new AlertDialog.Builder(context)
+                .setMessage(context.getString(R.string.dialog_delete_permission_description, permission.getEmail()))
+                .setPositiveButton(R.string.dialog_delete_confirm, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        FirebaseUtility.removePermission(permission);
+                    }
+                })
+                .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        if (dialog != null) {
+                            dialog.dismiss();
+                        }
+                    }
+                })
+                .create()
+                .show();
     }
 }

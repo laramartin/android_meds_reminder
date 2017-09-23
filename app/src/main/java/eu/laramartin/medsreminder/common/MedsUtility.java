@@ -4,7 +4,7 @@ import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.model.Med;
 import eu.laramartin.medsreminder.model.Report;
 
-import static eu.laramartin.medsreminder.common.CalendarUtility.getFormattedDateWithHour;
+import static eu.laramartin.medsreminder.common.CalendarUtility.getFormattedCurrentDateWithHour;
 
 public abstract class MedsUtility {
 
@@ -41,7 +41,7 @@ public abstract class MedsUtility {
     }
 
     public static Report getReportFromMed(Med med) {
-        String formattedDate = getFormattedDateWithHour();
+        String formattedDate = getFormattedCurrentDateWithHour();
         Report report = new Report();
         report.setMedName(med.getName());
         report.setTimeTaken(formattedDate);

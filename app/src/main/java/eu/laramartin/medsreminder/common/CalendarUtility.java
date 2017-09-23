@@ -63,8 +63,14 @@ public class CalendarUtility {
         return getDaysOfWeek(medDays);
     }
 
-    public static String getFormattedDateWithHour() {
+    public static String getFormattedCurrentDateWithHour() {
         Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm");
+        return dateFormat.format(date);
+    }
+
+    public static String getFormattedDateWithHour(String time) {
+        Date date = new Date(Long.valueOf(time));
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm");
         return dateFormat.format(date);
     }

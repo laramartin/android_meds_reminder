@@ -1,31 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                style="@style/WidgetStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/margin_medium">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              style="@style/WidgetText"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:padding="@dimen/margin_medium">
 
     <TextView
         android:id="@+id/widget_med_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_small"
+        android:textStyle="bold"
         tools:text="Medication 1"/>
-
-    <TextView
-        android:id="@+id/widget_med_date_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/widget_med_name_text"
-        tools:text="15/09/2017"/>
 
     <TextView
         android:id="@+id/widget_med_time_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/widget_med_name_text"
-        tools:text="18:00"/>
+        android:layout_marginLeft="@dimen/margin_medium"
+        tools:text="15/09/2017"/>
 
-</RelativeLayout>
+</LinearLayout>

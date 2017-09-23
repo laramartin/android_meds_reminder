@@ -21,7 +21,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="WidgetStyle">
+    <style name="WidgetText">
         <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Medium</item>
         <item name="android:textColor">@color/colorSoftGrey</item>
     </style>

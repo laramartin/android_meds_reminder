@@ -45,7 +45,6 @@ public class DialogsUtility {
                     public void onClick(DialogInterface dialog, int id) {
                         // TODO: 16.09.17 Lara: invite friend via intent email
                         String email = input.getText().toString();
-                        String email = input.getText().toString();
                         Permission permission = new Permission();
                         permission.setEmail(email);
                         FirebaseUtility.writePermissionOnDb(permission);

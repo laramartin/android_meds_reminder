@@ -29,7 +29,6 @@ public class FriendsFragment extends BaseFragment {
 
     private static final String LOG_TAG = FriendsFragment.class.getCanonicalName();
     private ValueEventListener valueEventListener;
-//    private List<User> usersThatGavePermission = new ArrayList<>();
     private Unbinder unbinder;
     private FriendsAdapter friendsAdapter;
 
@@ -43,7 +42,6 @@ public class FriendsFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_friends, container, false);
-        Log.i(LOG_TAG, "Friends fragment selected");
         unbinder = ButterKnife.bind(this, view);
         AppCompatActivity appCompatActivity = ((AppCompatActivity) getActivity());
         appCompatActivity.setSupportActionBar(toolbar);
@@ -67,13 +65,7 @@ public class FriendsFragment extends BaseFragment {
                     DataSnapshot permissions = currentSnapshot.child("permissions");
                     if (permissions.exists()) {
                         for (DataSnapshot permission : permissions.getChildren()) {
-                            if (permission.child("email").exists()) {
-                                if (permission.child("email").getValue().equals(FirebaseUtility.getCurrentUserEmail())) {
-                                    User userThatGavePermission = currentSnapshot.getValue(User.class);
-                                    friendsAdapter.add(userThatGavePermission);
-                                    Log.i(LOG_TAG, "User that gave permission: " + userThatGavePermission.toString());
-                                }
-                            }
+                            addToAdapterIfPermissionGranted(currentSnapshot, permission);
                         }
                     }
                 }
@@ -84,6 +76,24 @@ public class FriendsFragment extends BaseFragment {
 
             }
         };
+    }
+
+    public void addToAdapterIfPermissionGranted(DataSnapshot currentSnapshot, DataSnapshot permission) {
+        if (permission.child("email").exists()) {
+            if (isPermissionForCurrentUser(permission)) {
+                addPermissionToAdapter(currentSnapshot);
+            }
+        }
+    }
+
+    public void addPermissionToAdapter(DataSnapshot currentSnapshot) {
+        User userThatGavePermission = currentSnapshot.getValue(User.class);
+        friendsAdapter.add(userThatGavePermission);
+        Log.i(LOG_TAG, "User that gave permission: " + userThatGavePermission.toString());
+    }
+
+    public boolean isPermissionForCurrentUser(DataSnapshot permission) {
+        return permission.child("email").getValue().equals(FirebaseUtility.getCurrentUserEmail());
     }
 
     private void getGrantedPermissionsByUser() {

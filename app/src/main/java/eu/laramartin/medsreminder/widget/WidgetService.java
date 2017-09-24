@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import eu.laramartin.medsreminder.MainActivity;
 import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.common.CalendarUtility;
 import eu.laramartin.medsreminder.model.Med;
@@ -65,7 +66,6 @@ public class WidgetService extends RemoteViewsService {
             @Override
             public void onCreate() {
                 Log.i(LOG_TAG, "onCreate called");
-//                attachDatabaseReadListener();
             }
 
             @Override
@@ -90,7 +90,7 @@ public class WidgetService extends RemoteViewsService {
             @Override
             public RemoteViews getViewAt(int position) {
                 final RemoteViews remoteView = new RemoteViews(
-                        getApplicationContext().getPackageName(), R.layout.widget_list_item);
+                        getApplicationContext().getPackageName(), R.layout.widget_details_item);
                 if (meds != null || !meds.isEmpty()) {
                     Med med = meds.get(position);
 
@@ -99,12 +99,14 @@ public class WidgetService extends RemoteViewsService {
                     remoteView.setTextViewText(R.id.widget_med_name_text, med.getName());
                     remoteView.setTextViewText(R.id.widget_med_time_text, formattedNextDate);
                 }
+                Intent fillIntent = new Intent(getApplicationContext(), MainActivity.class);
+                remoteView.setOnClickFillInIntent(R.id.widget_list_item, fillIntent);
                 return remoteView;
             }
 
             @Override
             public RemoteViews getLoadingView() {
-                return new RemoteViews(getPackageName(), R.layout.widget_list_item);
+                return new RemoteViews(getPackageName(), R.layout.widget_details_item);
             }
 
             @Override

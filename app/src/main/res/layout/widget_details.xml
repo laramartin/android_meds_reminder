@@ -7,7 +7,7 @@
               android:padding="@dimen/margin_medium">
 
     <FrameLayout
-        android:id="@+id/widget"
+        android:id="@+id/widget_header"
         android:layout_width="match_parent"
         android:layout_height="@dimen/abc_action_bar_default_height_material"
         android:background="@color/colorPrimary">
@@ -19,33 +19,34 @@
             android:contentDescription="@string/app_name"
             android:text="@string/app_name"
             android:textColor="@color/colorSoftGrey"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
     </FrameLayout>
 
     <FrameLayout
-        android:layout_width="match_parent"
         android:id="@+id/widget_container"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/colorBlackTransparency">
+        android:background="@color/colorBlackTransparency"
+        android:clickable="true">
 
         <ListView
-            android:id="@+id/widget_list"
+            android:id="@+id/widget_list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@null"
             android:dividerHeight="0dp"
             android:padding="8dp"
-            tools:listitem="@layout/widget_list_item" />
+            tools:listitem="@layout/widget_details_item"/>
 
         <TextView
-            android:id="@+id/widget_empty"
+            android:id="@+id/widget_empty_view"
             style="@style/WidgetText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="sans-serif-condensed"
             android:gravity="center"
             android:text="@string/widget_empty_meds_list"
-            android:textAppearance="?android:textAppearanceLarge" />
+            android:textAppearance="?android:textAppearanceLarge"/>
     </FrameLayout>
 </LinearLayout>

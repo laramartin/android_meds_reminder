@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/widget_list_item_layout"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical"
               android:padding="@dimen/margin_medium">
-
     <TextView
         android:id="@+id/widget_med_name_text"
         style="@style/WidgetText"

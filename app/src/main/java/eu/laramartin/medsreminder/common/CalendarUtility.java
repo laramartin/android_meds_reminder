@@ -1,5 +1,7 @@
 package eu.laramartin.medsreminder.common;
 
+import android.support.annotation.NonNull;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,12 +40,7 @@ public class CalendarUtility {
 
     public static long millisToNextTargetDay(int targetDayOfWeek, int targetHour, int targetMinute) {
         Calendar now = Calendar.getInstance();
-        Calendar next = Calendar.getInstance();
-        int nowDoW = now.get(Calendar.DAY_OF_WEEK);
-        int addDays = (targetDayOfWeek - nowDoW) % 7;
-        next.add(Calendar.DAY_OF_YEAR, addDays);
-        next.set(Calendar.HOUR_OF_DAY, targetHour);
-        next.set(Calendar.MINUTE, targetMinute);
+        Calendar next = getNextCalendarDay(targetDayOfWeek, targetHour, targetMinute);
 
         long date = next.getTimeInMillis();
         long diff = date - now.getTimeInMillis();
@@ -58,6 +55,18 @@ public class CalendarUtility {
         return diff;
     }
 
+    @NonNull
+    public static Calendar getNextCalendarDay(int targetDayOfWeek, int targetHour, int targetMinute) {
+        Calendar now = Calendar.getInstance();
+        Calendar next = Calendar.getInstance();
+        int nowDoW = now.get(Calendar.DAY_OF_WEEK);
+        int addDays = (targetDayOfWeek - nowDoW) % 7;
+        next.add(Calendar.DAY_OF_YEAR, addDays);
+        next.set(Calendar.HOUR_OF_DAY, targetHour);
+        next.set(Calendar.MINUTE, targetMinute);
+        return next;
+    }
+
     public static List<Integer> getMedDays(Med med) {
         String medDays = med.getDays();
         return getDaysOfWeek(medDays);
@@ -69,9 +78,22 @@ public class CalendarUtility {
         return dateFormat.format(date);
     }
 
-//    public static String getFormattedDateWithHour(String time) {
-//        Date date = new Date(Long.valueOf(time));
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm");
-//        return dateFormat.format(date);
-//    }
+    public static String getFormattedDateWithHour(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm");
+        return dateFormat.format(date);
+    }
+
+
+    public static Date getNextTake(Med med) {
+        List<Integer> days = CalendarUtility.getMedDays(med);
+        long diffInMillisToNextDay = Long.MAX_VALUE;
+        for (int day : days) {
+            String[] timeSplit = med.getTime().split(":");
+            int hours = Integer.valueOf(timeSplit[0]);
+            int minutes = Integer.valueOf(timeSplit[1]);
+            long diff = CalendarUtility.millisToNextTargetDay(day, hours, minutes);
+            diffInMillisToNextDay = Math.min(diff, diffInMillisToNextDay);
+        }
+        return new Date(diffInMillisToNextDay + System.currentTimeMillis());
+    }
 }

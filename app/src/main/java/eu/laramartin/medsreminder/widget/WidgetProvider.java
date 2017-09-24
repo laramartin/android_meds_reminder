@@ -16,21 +16,20 @@ public class WidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int appWidgetId : appWidgetIds) {
+            RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_details);
 
             Intent remoteAdapterIntent = new Intent(context, WidgetService.class);
-
-
             Intent mainActivityIntent = new Intent(context, MainActivity.class);
             PendingIntent mainActivityPendingIntent = PendingIntent.getActivity(context, 0, mainActivityIntent, 0);
+            remoteViews.setOnClickPendingIntent(R.id.widget_header, mainActivityPendingIntent);
 
+            remoteViews.setRemoteAdapter(R.id.widget_list_view, remoteAdapterIntent);
+            remoteViews.setEmptyView(R.id.widget_list_view, R.id.widget_empty_view);
 
+            Intent clickItemIntent = new Intent(context, MainActivity.class);
+            PendingIntent clickItemPendingItent = PendingIntent.getActivity(context, 0, clickItemIntent, 0);
+            remoteViews.setPendingIntentTemplate(R.id.widget_list_view, clickItemPendingItent);
 
-            RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_list);
-
-            remoteViews.setOnClickPendingIntent(R.id.widget, mainActivityPendingIntent);
-
-            remoteViews.setRemoteAdapter(R.id.widget_list, remoteAdapterIntent);
-            remoteViews.setEmptyView(R.id.widget_list, R.id.widget_empty);
             appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
         }
         super.onUpdate(context, appWidgetManager, appWidgetIds);
@@ -42,6 +41,6 @@ public class WidgetProvider extends AppWidgetProvider {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(
                 new ComponentName(context, getClass()));
-        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_list);
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_list_view);
     }
 }

@@ -5,14 +5,13 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.model.Med;
@@ -23,38 +22,24 @@ public class WidgetService extends RemoteViewsService {
 
     private List<Med> meds = new ArrayList<>();
     private DatabaseReference medsReference;
-    private ChildEventListener medsChildEventListener;
-    private CountDownLatch countDownLatch = new CountDownLatch(1);
+    private ValueEventListener medsValueEventListener;
     private String LOG_TAG = WidgetService.class.getCanonicalName();
 
     private void attachDatabaseReadListener() {
         medsReference = getMedsReference();
-        if (medsChildEventListener == null) {
-            medsChildEventListener = new ChildEventListener() {
+        if (medsValueEventListener == null) {
+            medsValueEventListener = new ValueEventListener() {
+
                 @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    Med snapshot = dataSnapshot.getValue(Med.class);
-                    snapshot.setKey(dataSnapshot.getKey());
-                    if (snapshot != null) {
-                        meds.add(snapshot);
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Iterable<DataSnapshot> medsDataSnapshot = dataSnapshot.getChildren();
+                    for (DataSnapshot currentSnapshot : medsDataSnapshot) {
+                        Med medSnapshot = currentSnapshot.getValue(Med.class);
+                        medSnapshot.setKey(dataSnapshot.getKey());
+                        if (medSnapshot != null) {
+                            meds.add(medSnapshot);
+                        }
                     }
-                }
-
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-                    Med med = dataSnapshot.getValue(Med.class);
-                    med.setKey(dataSnapshot.getKey());
-                    meds.remove(med);
-                }
-
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
                 }
 
                 @Override
@@ -62,8 +47,7 @@ public class WidgetService extends RemoteViewsService {
 
                 }
             };
-            medsReference.addChildEventListener(medsChildEventListener);
-            countDownLatch.countDown();
+            medsReference.addValueEventListener(medsValueEventListener);
         }
     }
 
@@ -73,39 +57,22 @@ public class WidgetService extends RemoteViewsService {
 
             @Override
             public void onCreate() {
-//                attachDatabaseReadListener();
                 Log.i(LOG_TAG, "onCreate called");
-
-                Med med1 = new Med();
-                Med med2 = new Med();
-                Med med3 = new Med();
-                med1.setName("medication 1");
-                med1.setTime("01/09/2017 at 10:00");
-                med2.setName("medication 2");
-                med2.setTime("02/09/2017 at 10:00");
-                med3.setName("medication 3");
-                med3.setTime("03/09/2017 at 10:00");
-                meds.add(med1);
-                meds.add(med2);
-                meds.add(med3);
+//                attachDatabaseReadListener();
             }
 
             @Override
             public void onDataSetChanged() {
                 Log.i(LOG_TAG, "onDataSetChanged called");
-//                countDownLatch = new CountDownLatch(1);
-//                attachDatabaseReadListener();
-//                try {
-//                    countDownLatch.await();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
+                attachDatabaseReadListener();
             }
 
             @Override
             public void onDestroy() {
                 Log.i(LOG_TAG, "onDestroy called");
-//                medsReference.removeEventListener(medsChildEventListener);
+                if (medsValueEventListener != null) {
+                    medsReference.removeEventListener(medsValueEventListener);
+                }
             }
 
             @Override
@@ -115,19 +82,14 @@ public class WidgetService extends RemoteViewsService {
 
             @Override
             public RemoteViews getViewAt(int position) {
-
                 final RemoteViews remoteView = new RemoteViews(
                         getApplicationContext().getPackageName(), R.layout.widget_list_item);
                 if (meds != null || !meds.isEmpty()) {
                     Med med = meds.get(position);
+//                    String time = CalendarUtility.getFormattedDateWithHour(med.getTime());
                     remoteView.setTextViewText(R.id.widget_med_name_text, med.getName());
                     remoteView.setTextViewText(R.id.widget_med_time_text, med.getTime());
                 }
-
-//                String time = CalendarUtility.getFormattedDateWithHour(med.getTime());
-//                remoteView.setTextViewText(R.id.widget_med_name_text, med.getName());
-//                remoteView.setTextViewText(R.id.widget_med_time_text, time);
-
                 return remoteView;
             }
 

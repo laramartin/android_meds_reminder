@@ -69,9 +69,9 @@ public class CalendarUtility {
         return dateFormat.format(date);
     }
 
-    public static String getFormattedDateWithHour(String time) {
-        Date date = new Date(Long.valueOf(time));
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm");
-        return dateFormat.format(date);
-    }
+//    public static String getFormattedDateWithHour(String time) {
+//        Date date = new Date(Long.valueOf(time));
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm");
+//        return dateFormat.format(date);
+//    }
 }

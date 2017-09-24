@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
-              style="@style/WidgetText"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical"
@@ -9,6 +8,7 @@
 
     <TextView
         android:id="@+id/widget_med_name_text"
+        style="@style/WidgetText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_small"
@@ -17,6 +17,7 @@
 
     <TextView
         android:id="@+id/widget_med_time_text"
+        style="@style/WidgetText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_medium"

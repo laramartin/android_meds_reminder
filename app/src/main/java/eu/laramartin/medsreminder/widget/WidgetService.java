@@ -12,9 +12,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import eu.laramartin.medsreminder.R;
+import eu.laramartin.medsreminder.common.CalendarUtility;
 import eu.laramartin.medsreminder.model.Med;
 
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.getMedsReference;
@@ -91,9 +93,11 @@ public class WidgetService extends RemoteViewsService {
                         getApplicationContext().getPackageName(), R.layout.widget_list_item);
                 if (meds != null || !meds.isEmpty()) {
                     Med med = meds.get(position);
-//                    String time = CalendarUtility.getFormattedDateWithHour(med.getTime());
+
+                    Date date = CalendarUtility.getNextTake(med);
+                    String formattedNextDate = CalendarUtility.getFormattedDateWithHour(date);
                     remoteView.setTextViewText(R.id.widget_med_name_text, med.getName());
-                    remoteView.setTextViewText(R.id.widget_med_time_text, med.getTime());
+                    remoteView.setTextViewText(R.id.widget_med_time_text, formattedNextDate);
                 }
                 return remoteView;
             }

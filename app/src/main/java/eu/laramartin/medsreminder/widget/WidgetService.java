@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +27,10 @@ public class WidgetService extends RemoteViewsService {
     private String LOG_TAG = WidgetService.class.getCanonicalName();
 
     private void attachDatabaseReadListener() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() == null) {
+            return;
+        }
         medsReference = getMedsReference();
         if (medsValueEventListener == null) {
             medsValueEventListener = new ValueEventListener() {

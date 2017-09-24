@@ -73,16 +73,13 @@ public class CalendarUtility {
     }
 
     public static String getFormattedCurrentDateWithHour() {
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm");
-        return dateFormat.format(date);
+        return getFormattedDateWithHour(new Date());
     }
 
     public static String getFormattedDateWithHour(Date date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm");
         return dateFormat.format(date);
     }
-
 
     public static Date getNextTake(Med med) {
         List<Integer> days = CalendarUtility.getMedDays(med);

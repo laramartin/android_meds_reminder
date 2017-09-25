@@ -22,7 +22,7 @@
             android:name=".meds.AddMedActivity"
             android:label="@string/add_med_title"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/ToolbarTheme">
+            android:theme="@style/ToolbarTheme.SlideUp">
         </activity>
         <activity
             android:name=".reminders.RemindersActivity"

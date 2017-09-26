@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,6 +47,7 @@ public class MedsFragment extends BaseFragment {
     private ChildEventListener medsChildEventListener;
     private MedsAdapter medsAdapter;
     private DatabaseReference medsReference;
+    private FirebaseAnalytics firebaseAnalytics;
 
     @Nullable
     @Override
@@ -55,7 +57,9 @@ public class MedsFragment extends BaseFragment {
         AppCompatActivity appCompatActivity = ((AppCompatActivity) getActivity());
         appCompatActivity.setSupportActionBar(toolbar);
         setHasOptionsMenu(true);
-        medsAdapter = new MedsAdapter();
+        firebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+
+        medsAdapter = new MedsAdapter(firebaseAnalytics);
         recyclerView.setAdapter(medsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         fab.setOnClickListener(new View.OnClickListener() {

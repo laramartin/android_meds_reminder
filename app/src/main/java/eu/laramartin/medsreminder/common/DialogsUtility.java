@@ -6,7 +6,10 @@ import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.widget.EditText;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import eu.laramartin.medsreminder.R;
+import eu.laramartin.medsreminder.firebase.AnalyticsUtility;
 import eu.laramartin.medsreminder.firebase.FirebaseUtility;
 import eu.laramartin.medsreminder.meds.MedsAdapterItem;
 import eu.laramartin.medsreminder.model.Permission;
@@ -32,7 +35,7 @@ public class DialogsUtility {
                 .show();
     }
 
-    public static void showInviteFriendDialog(Context context) {
+    public static void showInviteFriendDialog(Context context, final FirebaseAnalytics firebaseAnalytics) {
         final EditText input = new EditText(context);
         input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
 
@@ -47,6 +50,7 @@ public class DialogsUtility {
                         Permission permission = new Permission();
                         permission.setEmail(email);
                         FirebaseUtility.writePermissionOnDb(permission);
+                        AnalyticsUtility.friendInvited(firebaseAnalytics, permission);
                     }
                 })
                 .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {

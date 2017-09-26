@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,12 +29,14 @@ public class PermissionsActivity extends AppCompatActivity implements View.OnCli
 
     private DatabaseReference permissionsReference;
     private PermissionsAdapter permissionsAdapter;
+    private FirebaseAnalytics firebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permissions);
         ButterKnife.bind(this);
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         permissionsAdapter = new PermissionsAdapter();
         recyclerView.setAdapter(permissionsAdapter);
@@ -82,6 +85,6 @@ public class PermissionsActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View view) {
-        DialogsUtility.showInviteFriendDialog(this);
+        DialogsUtility.showInviteFriendDialog(this, firebaseAnalytics);
     }
 }

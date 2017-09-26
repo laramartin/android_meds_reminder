@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,7 @@ import butterknife.ButterKnife;
 import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.common.DialogsUtility;
 import eu.laramartin.medsreminder.common.MedsUtility;
+import eu.laramartin.medsreminder.firebase.AnalyticsUtility;
 import eu.laramartin.medsreminder.model.Med;
 import eu.laramartin.medsreminder.model.Report;
 
@@ -29,6 +32,11 @@ import static eu.laramartin.medsreminder.firebase.FirebaseUtility.writeReportOnD
 public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder> {
 
     private List<Med> meds = new ArrayList<>();
+    private FirebaseAnalytics firebaseAnalytics;
+
+    public MedsAdapter(FirebaseAnalytics firebaseAnalytics) {
+        this.firebaseAnalytics = firebaseAnalytics;
+    }
 
     public void add(Med med) {
         meds.add(med);
@@ -103,6 +111,7 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
                 public void onClick(View view) {
                     Report report = getReportFromMed(medsAdapterItem.getMed());
                     writeReportOnDb(report);
+                    AnalyticsUtility.takeMed(firebaseAnalytics, medsAdapterItem.getMed());
                     Toast.makeText(itemView.getContext(), medName.getText() + " taken!", Toast.LENGTH_SHORT).show();
                     Log.i("MedsAdapter", "report: " + report.toString());
                 }

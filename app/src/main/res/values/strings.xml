@@ -82,6 +82,7 @@
     <string name="reminder_day_bundle_key">reminder_day_key</string>
     <string name="reminder_time_bundle_key">reminder_time_key</string>
     <string name="reminder_tag_bundle_key">reminder_id_key</string>
+    <string name="reminder_content_description_switch">Switch to enable reminders to take your med</string>
 
     <!-- Permissions screen -->
     <string name="permissions_screen_title">Permissions</string>

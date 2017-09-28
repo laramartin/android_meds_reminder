@@ -6,6 +6,7 @@
               android:layout_height="wrap_content"
               android:orientation="vertical"
               android:padding="@dimen/margin_medium">
+
     <TextView
         android:id="@+id/widget_med_name_text"
         style="@style/WidgetText"
@@ -20,7 +21,7 @@
         style="@style/WidgetText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginStart="@dimen/margin_medium"
         tools:text="15/09/2017"/>
 
 </LinearLayout>

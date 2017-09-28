@@ -23,7 +23,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"/>
+        app:layout_constraintVertical_bias="1.0"
+        android:contentDescription="@string/permissions_content_description_fab"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/permissions_recyclerview"

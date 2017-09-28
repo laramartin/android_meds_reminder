@@ -100,9 +100,13 @@ public class AddMedActivity extends AppCompatActivity {
         if (isDaySelected(day)) {
             selectedDays = selectedDays.replace(day, "");
             setDayViewBackground(currentDayTextView, false);
+            currentDayTextView.setContentDescription(
+                    getResources().getString(R.string.add_med_content_description_day_selected, day));
         } else {
             selectedDays = selectedDays.concat(day);
             setDayViewBackground(currentDayTextView, true);
+            currentDayTextView.setContentDescription(
+                    getResources().getString(R.string.add_med_content_description_day_unselected, day));
         }
     }
 

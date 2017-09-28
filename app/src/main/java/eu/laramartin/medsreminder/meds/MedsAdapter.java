@@ -153,14 +153,15 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
 
             medName.setText(med.getName());
             medIcon.setImageResource(MedsUtility.getMedIcon(med.getDosage()));
-            // TODO: 31.08.17 Lara: handle set date
+
+            // TODO: 31.08.17 Lara: handle set date, hardcoded until feature is implemented
             medDate.setText("07/07/2017");
             medTime.setText(med.getTime());
-            // TODO: 31.08.17 Lara: handle different time status
+            // TODO: 31.08.17 Lara: handle different time status, hardcoded until feature is implemented
             medTimeStatus.setText("On time");
+
             // TODO: 31.08.17 Lara: format days like "Days: Mo, Tu"
             medDays.setText(med.getDays());
-            // TODO: 31.08.17 Lara: format notes like "Notes: blabla..."
             if (med.getNotes() != null && !med.getNotes().isEmpty()) {
                 medNotes.setText(med.getNotes());
                 medNotes.setVisibility(View.VISIBLE);

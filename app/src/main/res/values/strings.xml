@@ -42,6 +42,18 @@
         <item>Topic</item>
     </string-array>
 
+    <string name="add_med_content_description_monday">Monday</string>
+    <string name="add_med_content_description_tuesday">Tuesday</string>
+    <string name="add_med_content_description_wednesday">Wednesday</string>
+    <string name="add_med_content_description_thursday">Thursday</string>
+    <string name="add_med_content_description_friday">Friday</string>
+    <string name="add_med_content_description_saturday">Saturday</string>
+    <string name="add_med_content_description_sunday">Sunday</string>
+    <string name="add_med_content_description_notes">Add your notes here</string>
+    <string name="add_med_content_description_name">Add the name of your med</string>
+    <string name="add_med_content_description_day_selected">%s is now selected.</string>
+    <string name="add_med_content_description_day_unselected">%s is now unselected.</string>
+
     <!-- Meds list screen -->
     <string name="meds_edit_title">Edit</string>
     <string name="meds_take_title">Take</string>

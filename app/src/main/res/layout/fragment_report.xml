@@ -9,6 +9,7 @@
         android:id="@+id/reports_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="@dimen/margin_medium"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <android.support.design.widget.AppBarLayout

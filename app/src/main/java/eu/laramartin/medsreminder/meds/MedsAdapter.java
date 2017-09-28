@@ -1,6 +1,7 @@
 package eu.laramartin.medsreminder.meds;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -86,6 +87,8 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
         TextView medDays;
         @BindView(R.id.med_notes)
         TextView medNotes;
+        @BindView(R.id.meds_edit)
+        TextView medEdit;
         // TODO: 31.08.17 Lara: show next date to take medicine
         @BindView(R.id.med_date)
         TextView medDate;
@@ -106,6 +109,7 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
+            medEdit.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             takeMedLabel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

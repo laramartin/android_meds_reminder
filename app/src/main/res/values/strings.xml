@@ -45,6 +45,9 @@
     <!-- Meds list screen -->
     <string name="meds_edit_title">Edit</string>
     <string name="meds_take_title">Take</string>
+    <string name="meds_content_description_fab">Add a new med</string>
+    <string name="meds_content_description_take_button">Mark your medicine as taken</string>
+    <string name="meds_content_description_edit_button">Edit med feature is currently disabled</string>
 
     <!-- Dialogs -->
     <string name="dialog_delete_med_description">Are you sure you want to remove this med? You will lose all the med data.</string>

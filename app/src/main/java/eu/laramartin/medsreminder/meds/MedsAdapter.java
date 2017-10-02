@@ -87,6 +87,8 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
         ImageView medIcon;
         @BindView(R.id.med_name)
         TextView medName;
+        @BindView(R.id.med_reminder_icon)
+        ImageView medReminder;
         @BindView(R.id.med_time)
         TextView medTime;
         @BindView(R.id.med_days)
@@ -155,10 +157,14 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
             medsAdapterItem.setMed(med);
             this.medsAdapterItem = medsAdapterItem;
 
-            medName.setText(med.getName());
             medIcon.setImageResource(MedsUtility.getMedIcon(med.getDosage()));
+            medName.setText(med.getName());
+            if (med.getReminderJobTags() != null && !med.getReminderJobTags().isEmpty()) {
+                medReminder.setVisibility(View.VISIBLE);
+            } else {
+                medReminder.setVisibility(View.INVISIBLE);
+            }
 
-            // TODO: 31.08.17 Lara: handle set date, hardcoded until feature is implemented
             medDate.setText(nextDate(med));
             medTime.setText(med.getTime());
             // TODO: 31.08.17 Lara: handle different time status, hardcoded until feature is implemented

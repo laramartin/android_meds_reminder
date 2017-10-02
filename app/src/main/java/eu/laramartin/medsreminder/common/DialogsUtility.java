@@ -45,7 +45,6 @@ public class DialogsUtility {
                 .setMessage(R.string.dialog_give_permissions_to_friend)
                 .setPositiveButton(R.string.dialog_accept, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // TODO: 16.09.17 Lara: invite friend via intent email
                         String email = input.getText().toString();
                         Permission permission = new Permission();
                         permission.setEmail(email);

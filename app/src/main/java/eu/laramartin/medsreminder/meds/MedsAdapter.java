@@ -99,7 +99,6 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
         TextView medEdit;
         @BindView(R.id.med_date)
         TextView medDate;
-        // TODO: 31.08.17 Lara: show current time status (on time, soon, it' time)
         @BindView(R.id.med_time_status)
         TextView medTimeStatus;
         @BindView(R.id.meds_constraint_layout_details)

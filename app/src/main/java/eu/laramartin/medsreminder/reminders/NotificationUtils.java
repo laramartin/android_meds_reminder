@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 
@@ -36,9 +35,7 @@ class NotificationUtils {
                 .addAction(takeMedAction(context))
                 .setAutoCancel(true);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            notificationBuilder.setPriority(Notification.PRIORITY_HIGH);
-        }
+        notificationBuilder.setPriority(Notification.PRIORITY_HIGH);
 
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -46,7 +43,6 @@ class NotificationUtils {
         notificationManager.notify(MED_REMINDER_NOTIFICATION_ID, notificationBuilder.build());
     }
 
-    // TODO: 10.09.17 Lara: implement action adding a report to Firebase or remove completely
     static NotificationCompat.Action takeMedAction(Context context) {
         Intent takeMedIntent = new Intent(context, ReminderIntentService.class);
         PendingIntent takeMedPendingIntent = PendingIntent.getService(

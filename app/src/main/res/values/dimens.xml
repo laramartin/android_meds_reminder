@@ -5,7 +5,6 @@
     <dimen name="margin_small">4dp</dimen>
 
     <dimen name="padding_medium">16dp</dimen>
-    <dimen name="padding_small">4dp</dimen>
 
     <dimen name="fab_default">56dp</dimen>
     <dimen name="icon_medium">40dp</dimen>

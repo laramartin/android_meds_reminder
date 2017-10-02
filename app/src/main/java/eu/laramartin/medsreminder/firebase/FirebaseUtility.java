@@ -66,8 +66,6 @@ public class FirebaseUtility {
                     user.setEmail(firebaseUser.getEmail());
                     user.setId(firebaseUser.getUid());
                     currentUserReference.setValue(user);
-                } else {
-                    User currentUser = dataSnapshot.getValue(User.class);
                 }
             }
 

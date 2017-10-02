@@ -33,7 +33,6 @@ import static eu.laramartin.medsreminder.firebase.FirebaseUtility.writeMedOnDb;
 
 public class AddMedActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = AddMedActivity.class.getCanonicalName();
     @BindView(R.id.add_dosage_spinner)
     Spinner dosageSpinner;
     @BindView(R.id.add_dosage_icon)

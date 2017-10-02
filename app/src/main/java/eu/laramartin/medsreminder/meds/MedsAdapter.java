@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Paint;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +14,13 @@ import android.widget.Toast;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.laramartin.medsreminder.R;
+import eu.laramartin.medsreminder.common.CalendarUtility;
 import eu.laramartin.medsreminder.common.DialogsUtility;
 import eu.laramartin.medsreminder.common.MedsUtility;
 import eu.laramartin.medsreminder.firebase.AnalyticsUtility;
@@ -75,6 +76,11 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
         }
     }
 
+    private String nextDate(Med med) {
+        Date date = CalendarUtility.getNextTake(med);
+        return CalendarUtility.getFormattedDate(date);
+    }
+
     public class MedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         @BindView(R.id.med_icon)
@@ -89,7 +95,6 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
         TextView medNotes;
         @BindView(R.id.meds_edit)
         TextView medEdit;
-        // TODO: 31.08.17 Lara: show next date to take medicine
         @BindView(R.id.med_date)
         TextView medDate;
         // TODO: 31.08.17 Lara: show current time status (on time, soon, it' time)
@@ -117,7 +122,6 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
                     writeReportOnDb(report);
                     AnalyticsUtility.takeMed(firebaseAnalytics, medsAdapterItem.getMed());
                     Toast.makeText(itemView.getContext(), medName.getText() + " taken!", Toast.LENGTH_SHORT).show();
-                    Log.i("MedsAdapter", "report: " + report.toString());
                 }
             });
         }
@@ -155,7 +159,7 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
             medIcon.setImageResource(MedsUtility.getMedIcon(med.getDosage()));
 
             // TODO: 31.08.17 Lara: handle set date, hardcoded until feature is implemented
-            medDate.setText("07/07/2017");
+            medDate.setText(nextDate(med));
             medTime.setText(med.getTime());
             // TODO: 31.08.17 Lara: handle different time status, hardcoded until feature is implemented
             medTimeStatus.setText("On time");

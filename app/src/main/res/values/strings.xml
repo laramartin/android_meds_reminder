@@ -42,13 +42,13 @@
         <item>Topic</item>
     </string-array>
 
-    <string name="add_med_content_description_monday">Monday</string>
-    <string name="add_med_content_description_tuesday">Tuesday</string>
-    <string name="add_med_content_description_wednesday">Wednesday</string>
-    <string name="add_med_content_description_thursday">Thursday</string>
-    <string name="add_med_content_description_friday">Friday</string>
-    <string name="add_med_content_description_saturday">Saturday</string>
-    <string name="add_med_content_description_sunday">Sunday</string>
+    <string name="add_med_content_description_monday">@string/meds_monday</string>
+    <string name="add_med_content_description_tuesday">@string/meds_tuesday</string>
+    <string name="add_med_content_description_wednesday">@string/meds_wednesday</string>
+    <string name="add_med_content_description_thursday">@string/meds_thursday</string>
+    <string name="add_med_content_description_friday">@string/meds_friday</string>
+    <string name="add_med_content_description_saturday">@string/meds_saturday</string>
+    <string name="add_med_content_description_sunday">@string/meds_sunday</string>
     <string name="add_med_content_description_notes">Add your notes here</string>
     <string name="add_med_content_description_name">Add the name of your med</string>
     <string name="add_med_content_description_day_selected">%s is now selected.</string>
@@ -60,6 +60,13 @@
     <string name="meds_content_description_fab">Add a new med</string>
     <string name="meds_content_description_take_button">Mark your medicine as taken</string>
     <string name="meds_content_description_edit_button">Edit med feature is currently disabled</string>
+    <string name="meds_monday">Monday</string>
+    <string name="meds_tuesday">Tuesday</string>
+    <string name="meds_wednesday">Wednesday</string>
+    <string name="meds_thursday">Thursday</string>
+    <string name="meds_friday">Friday</string>
+    <string name="meds_saturday">Saturday</string>
+    <string name="meds_sunday">Sunday</string>
 
     <!-- Dialogs -->
     <string name="dialog_delete_med_description">Are you sure you want to remove this med? You will lose all the med data.</string>

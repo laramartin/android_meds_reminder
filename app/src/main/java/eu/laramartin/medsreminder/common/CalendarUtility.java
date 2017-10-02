@@ -1,5 +1,6 @@
 package eu.laramartin.medsreminder.common;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import java.text.SimpleDateFormat;
@@ -8,6 +9,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.model.Med;
 
 public class CalendarUtility {
@@ -97,5 +99,37 @@ public class CalendarUtility {
             diffInMillisToNextDay = Math.min(diff, diffInMillisToNextDay);
         }
         return new Date(diffInMillisToNextDay + System.currentTimeMillis());
+    }
+
+    public static String getFormattedDaysOfWeek(Context context, String medDays) {
+        StringBuilder builder = new StringBuilder();
+        if (medDays.contains("Mo")) {
+            builder.append(context.getString(R.string.meds_monday));
+            builder.append(" ");
+        }
+        if (medDays.contains("Tu")) {
+            builder.append(context.getString(R.string.meds_tuesday));
+            builder.append(" ");
+        }
+        if (medDays.contains("We")) {
+            builder.append(context.getString(R.string.meds_wednesday));
+            builder.append(" ");
+        }
+        if (medDays.contains("Th")) {
+            builder.append(context.getString(R.string.meds_thursday));
+            builder.append(" ");
+        }
+        if (medDays.contains("Fr")) {
+            builder.append(context.getString(R.string.meds_friday));
+            builder.append(" ");
+        }
+        if (medDays.contains("Sa")) {
+            builder.append(context.getString(R.string.meds_saturday));
+            builder.append(" ");
+        }
+        if (medDays.contains("Su")) {
+            builder.append(context.getString(R.string.meds_sunday));
+        }
+        return builder.toString();
     }
 }

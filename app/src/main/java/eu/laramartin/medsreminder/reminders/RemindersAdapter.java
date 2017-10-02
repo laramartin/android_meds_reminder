@@ -23,7 +23,6 @@ import static eu.laramartin.medsreminder.reminders.RemindersUtility.buildSwitchR
 
 public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.RemindersViewHolder> {
 
-    private static final String LOG_TAG = RemindersAdapter.class.getCanonicalName();
     private List<Med> meds = new ArrayList<>();
     private Settings settings;
 

@@ -81,6 +81,11 @@ public class CalendarUtility {
         return dateFormat.format(date);
     }
 
+    public static String getFormattedDate(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        return dateFormat.format(date);
+    }
+
     public static Date getNextTake(Med med) {
         List<Integer> days = CalendarUtility.getMedDays(med);
         long diffInMillisToNextDay = Long.MAX_VALUE;

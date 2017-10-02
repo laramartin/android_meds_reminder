@@ -94,6 +94,9 @@
     <!-- Permissions screen -->
     <string name="permissions_screen_title">Permissions</string>
     <string name="permissions_content_description_fab">click to grant permission to a friend</string>
+    <string name="intent_email_subject">Meds reminder permission</string>
+    <string name="intent_email_body">Hello!  I just granted you permission to see the meds I\'m taking with the Med Reminders App. Check it out!</string>
+    <string name="toast_no_email_provider">There aren\'t email apps installed...</string>
 
     <!-- Friends screen -->
     <string name="last_takes_label">Last 5 takes</string>
@@ -101,4 +104,5 @@
 
     <!-- Widget -->
     <string name="widget_empty_meds_list">Add meds in the database to show them here :)</string>
+
 </resources>

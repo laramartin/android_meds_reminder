@@ -63,7 +63,6 @@ public class WidgetService extends RemoteViewsService {
 
             @Override
             public void onCreate() {
-                attachDatabaseReadListener();
             }
 
             @Override

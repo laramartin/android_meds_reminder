@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +26,6 @@ import eu.laramartin.medsreminder.model.User;
 
 public class FriendsFragment extends BaseFragment {
 
-    private static final String LOG_TAG = FriendsFragment.class.getCanonicalName();
     private ValueEventListener valueEventListener;
     private Unbinder unbinder;
     private FriendsAdapter friendsAdapter;
@@ -89,7 +87,6 @@ public class FriendsFragment extends BaseFragment {
     public void addPermissionToAdapter(DataSnapshot currentSnapshot) {
         User userThatGavePermission = currentSnapshot.getValue(User.class);
         friendsAdapter.add(userThatGavePermission);
-        Log.i(LOG_TAG, "User that gave permission: " + userThatGavePermission.toString());
     }
 
     public boolean isPermissionForCurrentUser(DataSnapshot permission) {

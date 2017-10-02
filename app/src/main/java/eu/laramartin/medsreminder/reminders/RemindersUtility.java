@@ -3,7 +3,6 @@ package eu.laramartin.medsreminder.reminders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.firebase.jobdispatcher.Driver;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
@@ -24,7 +23,6 @@ import static eu.laramartin.medsreminder.common.CalendarUtility.millisToNextTarg
 
 public class RemindersUtility {
 
-    private static final String LOG_TAG = RemindersUtility.class.getCanonicalName();
     private static final int SYNC_FLEXTIME_SECONDS = 10;
 
     public static void scheduleMedReminder(Context context, Med med) {
@@ -43,8 +41,6 @@ public class RemindersUtility {
 
         med.setReminderJobTags(reminderJobTags);
         FirebaseUtility.updateMedOnDb(med);
-
-        Log.i(LOG_TAG, "created alarm for: " + med.getKey());
     }
 
     public static void scheduleAlarm(Context context, String time, Integer calendarDay, String reminderJobTag) {
@@ -73,9 +69,6 @@ public class RemindersUtility {
                 .setExtras(medAlarmBundle)
                 .build();
         dispatcher.schedule(job);
-
-        Log.i(LOG_TAG, "created alarm for: " + calendarDay +
-                " diff in seconds: " + diffInSeconds);
     }
 
     @NonNull

@@ -3,7 +3,6 @@ package eu.laramartin.medsreminder.reminders;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,11 +81,9 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.Remi
                                 med.getReminderJobTags());
                         med.setReminderJobTags(new ArrayList<String>());
                         FirebaseUtility.updateMedOnDb(med);
-                        Log.i(LOG_TAG, "alarm disabled for: " + med.getKey());
                     } else {
                         // activate reminder
                         RemindersUtility.scheduleMedReminder(compoundButton.getContext(), med);
-                        Log.i(LOG_TAG, "alarm enabled for: " + med.getKey());
                     }
                     String switchReminderKey = buildSwitchReminderKey(med);
                     settings.setAlarmEnabled(switchReminderKey, isReminderEnabled);

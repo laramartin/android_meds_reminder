@@ -170,8 +170,7 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
             // TODO: 31.08.17 Lara: handle different time status, hardcoded until feature is implemented
             medTimeStatus.setText("On time");
 
-            // TODO: 31.08.17 Lara: format days like "Days: Mo, Tu"
-            medDays.setText(med.getDays());
+            medDays.setText(CalendarUtility.getFormattedDaysOfWeek(itemView.getContext(), med.getDays()));
             if (med.getNotes() != null && !med.getNotes().isEmpty()) {
                 medNotes.setText(med.getNotes());
                 medNotes.setVisibility(View.VISIBLE);

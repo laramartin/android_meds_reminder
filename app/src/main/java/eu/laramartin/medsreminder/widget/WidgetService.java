@@ -1,7 +1,6 @@
 package eu.laramartin.medsreminder.widget;
 
 import android.content.Intent;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -27,7 +26,6 @@ public class WidgetService extends RemoteViewsService {
     private List<Med> meds = new ArrayList<>();
     private DatabaseReference medsReference;
     private ValueEventListener medsValueEventListener;
-    private String LOG_TAG = WidgetService.class.getCanonicalName();
 
     private void attachDatabaseReadListener() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -65,18 +63,16 @@ public class WidgetService extends RemoteViewsService {
 
             @Override
             public void onCreate() {
-                Log.i(LOG_TAG, "onCreate called");
+                attachDatabaseReadListener();
             }
 
             @Override
             public void onDataSetChanged() {
-                Log.i(LOG_TAG, "onDataSetChanged called");
                 attachDatabaseReadListener();
             }
 
             @Override
             public void onDestroy() {
-                Log.i(LOG_TAG, "onDestroy called");
                 if (medsValueEventListener != null) {
                     medsReference.removeEventListener(medsValueEventListener);
                 }

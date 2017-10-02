@@ -7,7 +7,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -18,8 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import eu.laramartin.medsreminder.meds.MedsFragment;
 import eu.laramartin.medsreminder.friends.FriendsFragment;
+import eu.laramartin.medsreminder.meds.MedsFragment;
 import eu.laramartin.medsreminder.reports.ReportsFragment;
 
 import static eu.laramartin.medsreminder.firebase.FirebaseUtility.getLoginIntent;
@@ -27,7 +26,6 @@ import static eu.laramartin.medsreminder.firebase.FirebaseUtility.getLoginIntent
 public class MainActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 498;
-    private static final String LOG_TAG = MainActivity.class.getCanonicalName();
     @BindView(R.id.bottom_navigation_view)
     BottomNavigationView bottomNavigationView;
     @Override
@@ -51,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadContentWhenSuccessfulLogin(Bundle savedInstanceState) {
-        Toast.makeText(this, "You're signed in!", Toast.LENGTH_SHORT).show();
         if (savedInstanceState == null) {
             openFragment(new MedsFragment());
         }
@@ -94,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
                 return;
             } else {
                 // Sign in failed
-                Log.e(LOG_TAG, "error in sign in");
                 IdpResponse response = IdpResponse.fromResultIntent(data);
                 if (response == null) {
                     // User pressed back button

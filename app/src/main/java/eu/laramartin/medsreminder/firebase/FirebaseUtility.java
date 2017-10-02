@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,16 +22,14 @@ import eu.laramartin.medsreminder.MainActivity;
 import eu.laramartin.medsreminder.R;
 import eu.laramartin.medsreminder.meds.MedsAdapterItem;
 import eu.laramartin.medsreminder.model.Med;
+import eu.laramartin.medsreminder.model.Permission;
 import eu.laramartin.medsreminder.model.Report;
 import eu.laramartin.medsreminder.model.User;
-import eu.laramartin.medsreminder.model.Permission;
 
 import static android.support.v4.content.ContextCompat.startActivity;
 
 
 public class FirebaseUtility {
-
-    private static final String LOG_TAG = FirebaseUtility.class.getCanonicalName();
 
     public static Intent getLoginIntent() {
         return AuthUI.getInstance()
@@ -71,13 +68,11 @@ public class FirebaseUtility {
                     currentUserReference.setValue(user);
                 } else {
                     User currentUser = dataSnapshot.getValue(User.class);
-                    Log.v(LOG_TAG, "User exists: " + currentUser);
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.v(LOG_TAG, "onCancelled");
             }
         });
     }

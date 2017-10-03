@@ -27,6 +27,7 @@ import static eu.laramartin.medsreminder.firebase.FirebaseUtility.getReportsRefe
 
 public class ReportsFragment extends BaseFragment {
 
+    private static final java.lang.String RV_POS_INDEX = "recycler_position";
     @BindView(R.id.reports_toolbar)
     Toolbar toolbar;
     @BindView(R.id.reports_recyclerview)
@@ -36,6 +37,7 @@ public class ReportsFragment extends BaseFragment {
     private ChildEventListener reportsChildEventListener;
     private ReportsAdapter reportsAdapter;
     private DatabaseReference reportsReference;
+    private LinearLayoutManager linearLayoutManager;
 
     @Nullable
     @Override
@@ -47,11 +49,31 @@ public class ReportsFragment extends BaseFragment {
         setHasOptionsMenu(true);
 
         reportsAdapter = new ReportsAdapter();
+        linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setAdapter(reportsAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         attachDatabaseReadListener();
+
+        if (savedInstanceState != null) {
+            final int recyclerPositionIndex = savedInstanceState.getInt(RV_POS_INDEX);
+
+            reportsAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+
+                public void onItemRangeInserted(int positionStart, int itemCount) {
+                    linearLayoutManager.scrollToPosition(recyclerPositionIndex);
+                }
+            });
+        }
+
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        int recyclerPositionIndex = linearLayoutManager.findFirstVisibleItemPosition();
+        outState.putInt(RV_POS_INDEX, recyclerPositionIndex);
     }
 
     private void attachDatabaseReadListener() {

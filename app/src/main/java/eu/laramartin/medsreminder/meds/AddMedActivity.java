@@ -205,7 +205,7 @@ public class AddMedActivity extends AppCompatActivity {
                         finish();
                         break;
                     } else {
-                        Toast.makeText(this, "Please select the days", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.add_select_day_error, Toast.LENGTH_SHORT).show();
                         return false;
                     }
                 } else {

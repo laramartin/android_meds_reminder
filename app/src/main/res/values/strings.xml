@@ -31,6 +31,7 @@
     <string name="add_med_error_empty_name">Please enter a name</string>
     <string name="add_time_default">10:00</string>
     <string name="add_time_picker_title">Select time</string>
+    <string name="add_select_day_error">Please select the days</string>
     <string-array name="dosage_array">
         <item>Capsule</item>
         <item>Liquid</item>
@@ -64,6 +65,7 @@
     <string name="meds_friday">Friday</string>
     <string name="meds_saturday">Saturday</string>
     <string name="meds_sunday">Sunday</string>
+    <string name="meds_taken_feedback">taken!</string>
     <string name="meds_content_description_fab">Add a new med</string>
     <string name="meds_content_description_take_button">Mark your medicine as taken</string>
     <string name="meds_content_description_edit_button">Edit med feature is currently disabled</string>

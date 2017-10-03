@@ -122,7 +122,9 @@ public class MedsAdapter extends RecyclerView.Adapter<MedsAdapter.MedViewHolder>
                     Report report = getReportFromMed(medsAdapterItem.getMed());
                     writeReportOnDb(report);
                     AnalyticsUtility.takeMed(firebaseAnalytics, medsAdapterItem.getMed());
-                    Toast.makeText(itemView.getContext(), medName.getText() + " taken!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(itemView.getContext(), medName.getText() +
+                            itemView.getContext().getString(R.string.meds_taken_feedback),
+                            Toast.LENGTH_SHORT).show();
                 }
             });
         }

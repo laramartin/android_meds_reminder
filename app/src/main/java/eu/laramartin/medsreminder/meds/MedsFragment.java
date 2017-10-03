@@ -33,6 +33,7 @@ import static eu.laramartin.medsreminder.firebase.FirebaseUtility.getMedsReferen
 
 public class MedsFragment extends BaseFragment {
 
+    private static final java.lang.String RV_POS_INDEX = "recycler_position";
     @BindView(R.id.collapsing_toolbar_layout)
     CollapsingToolbarLayout toolbarLayout;
     @BindView(R.id.meds_toolbar)
@@ -47,6 +48,7 @@ public class MedsFragment extends BaseFragment {
     private MedsAdapter medsAdapter;
     private DatabaseReference medsReference;
     private FirebaseAnalytics firebaseAnalytics;
+    private LinearLayoutManager linearLayoutManager;
 
     @Nullable
     @Override
@@ -59,8 +61,9 @@ public class MedsFragment extends BaseFragment {
         firebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
 
         medsAdapter = new MedsAdapter(firebaseAnalytics);
+        linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setAdapter(medsAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(linearLayoutManager);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +75,26 @@ public class MedsFragment extends BaseFragment {
 
         createUserIfDoesntExist();
         attachDatabaseReadListener();
+
+        if (savedInstanceState != null) {
+            final int recyclerPositionIndex = savedInstanceState.getInt(RV_POS_INDEX);
+
+            medsAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+
+                public void onItemRangeInserted(int positionStart, int itemCount) {
+                    linearLayoutManager.scrollToPosition(recyclerPositionIndex);
+                }
+            });
+        }
+
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        int recyclerPositionIndex = linearLayoutManager.findFirstVisibleItemPosition();
+        outState.putInt(RV_POS_INDEX, recyclerPositionIndex);
     }
 
     private void attachDatabaseReadListener() {

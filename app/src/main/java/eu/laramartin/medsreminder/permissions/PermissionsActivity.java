@@ -22,6 +22,7 @@ import eu.laramartin.medsreminder.model.Permission;
 
 public class PermissionsActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final java.lang.String RV_POS_INDEX = "recycler_position";
     @BindView(R.id.fab_permissions)
     FloatingActionButton fab;
     @BindView(R.id.permissions_recyclerview)
@@ -30,6 +31,7 @@ public class PermissionsActivity extends AppCompatActivity implements View.OnCli
     private DatabaseReference permissionsReference;
     private PermissionsAdapter permissionsAdapter;
     private FirebaseAnalytics firebaseAnalytics;
+    private LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +41,30 @@ public class PermissionsActivity extends AppCompatActivity implements View.OnCli
         firebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         permissionsAdapter = new PermissionsAdapter();
+        linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setAdapter(permissionsAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         fab.setOnClickListener(this);
+
         attachDatabaseReadListener();
+        if (savedInstanceState != null) {
+            final int recyclerPositionIndex = savedInstanceState.getInt(RV_POS_INDEX);
+
+            permissionsAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+
+                public void onItemRangeInserted(int positionStart, int itemCount) {
+                    linearLayoutManager.scrollToPosition(recyclerPositionIndex);
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        int recyclerPositionIndex = linearLayoutManager.findFirstVisibleItemPosition();
+        outState.putInt(RV_POS_INDEX, recyclerPositionIndex);
     }
 
     private void attachDatabaseReadListener() {

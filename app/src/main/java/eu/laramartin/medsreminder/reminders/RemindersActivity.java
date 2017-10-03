@@ -19,10 +19,12 @@ import eu.laramartin.medsreminder.model.Med;
 
 public class RemindersActivity extends AppCompatActivity {
 
+    private static final java.lang.String RV_POS_INDEX = "recycler_position";
     @BindView(R.id.reminder_recyclerview)
     RecyclerView recyclerView;
 
     private RemindersAdapter remindersAdapter;
+    private LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +34,27 @@ public class RemindersActivity extends AppCompatActivity {
 
         remindersAdapter = new RemindersAdapter(new Settings(this));
         recyclerView.setAdapter(remindersAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
         setAdapterData();
+
+        if (savedInstanceState != null) {
+            final int recyclerPositionIndex = savedInstanceState.getInt(RV_POS_INDEX);
+
+            remindersAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+
+                public void onItemRangeInserted(int positionStart, int itemCount) {
+                    linearLayoutManager.scrollToPosition(recyclerPositionIndex);
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        int recyclerPositionIndex = linearLayoutManager.findFirstVisibleItemPosition();
+        outState.putInt(RV_POS_INDEX, recyclerPositionIndex);
     }
 
     private void setAdapterData() {

@@ -26,9 +26,11 @@ import eu.laramartin.medsreminder.model.User;
 
 public class FriendsFragment extends BaseFragment {
 
+    private static final java.lang.String RV_POS_INDEX = "recycler_position";
     private ValueEventListener valueEventListener;
     private Unbinder unbinder;
     private FriendsAdapter friendsAdapter;
+    private LinearLayoutManager linearLayoutManager;
 
     @BindView(R.id.friends_recyclerview)
     RecyclerView recyclerView;
@@ -46,12 +48,32 @@ public class FriendsFragment extends BaseFragment {
         setHasOptionsMenu(true);
 
         friendsAdapter = new FriendsAdapter();
+        linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setAdapter(friendsAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         attachValueEventListener();
         getGrantedPermissionsByUser();
+
+        if (savedInstanceState != null) {
+            final int recyclerPositionIndex = savedInstanceState.getInt(RV_POS_INDEX);
+
+            friendsAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+
+                public void onItemRangeInserted(int positionStart, int itemCount) {
+                    linearLayoutManager.scrollToPosition(recyclerPositionIndex);
+                }
+            });
+        }
+
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        int recyclerPositionIndex = linearLayoutManager.findFirstVisibleItemPosition();
+        outState.putInt(RV_POS_INDEX, recyclerPositionIndex);
     }
 
     private void attachValueEventListener() {
